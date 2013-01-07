@@ -1371,4 +1371,8 @@
     <string name="lockscreen_maxnotif_sumary">Enable adjustment of max lockscreen notifications</string>
     <string name="lockscreen_maxnotif_config">Max lockscreen notifications</string>
 
+    <!-- Launch music player when headset is connected -->
+    <string name="headset_connect_player_title">Launch music app</string>
+    <string name="headset_connect_player_summary">Launch the default music app when headset is connected</string>
+
 </resources>
