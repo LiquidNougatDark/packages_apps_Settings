@@ -37,6 +37,12 @@
         android:fragment="com.android.settings.mallow.ClockStyles" />
 
     <PreferenceScreen
+        android:key="keyboard_input"
+        android:title="@string/keyboard_input_title"
+        android:summary="@string/keyboard_input_summary"
+        android:fragment="com.android.settings.mallow.KeyboardInput" />
+
+    <PreferenceScreen
         android:key="lock_screen"
         android:title="@string/lock_screen_title"
         android:summary="@string/lock_screen_summary"
