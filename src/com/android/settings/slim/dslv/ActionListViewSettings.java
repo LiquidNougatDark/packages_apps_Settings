@@ -35,8 +35,11 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,6 +56,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.internal.util.slim.ActionChecker;
 import com.android.internal.util.slim.ActionConfig;
 import com.android.internal.util.slim.ActionConstants;
 import com.android.internal.util.slim.ActionHelper;
@@ -92,6 +96,7 @@ public class ActionListViewSettings extends ListFragment implements
     private static final int LOCKSCREEN_SHORTCUT   = 4;
     private static final int POWER_MENU_SHORTCUT   = 5;
     private static final int SHAKE_EVENTS_DISABLED = 6;
+    private static final int RECENT_APP_SIDEBAR    = 7;
 
     private static final int DEFAULT_MAX_ACTION_NUMBER = 5;
     private static final int DEFAULT_NUMBER_OF_ACTIONS = 3;
@@ -152,12 +157,17 @@ public class ActionListViewSettings extends ListFragment implements
             public void remove(int which) {
                 ActionConfig item = mActionConfigsAdapter.getItem(which);
                 mActionConfigsAdapter.remove(item);
-                if (mDisableDeleteLastEntry && mActionConfigs.size() == 0) {
+                if (!ActionChecker.containsAction(mActivity, item, ActionConstants.ACTION_BACK)
+                        || !ActionChecker.containsAction(
+                        mActivity, item, ActionConstants.ACTION_HOME)) {
+                    mActionConfigsAdapter.insert(item, which);
+                    showDialogInner(DLG_DELETION_NOT_ALLOWED, 0, false, false);
+                } else if (mDisableDeleteLastEntry && mActionConfigs.size() == 0) {
                     mActionConfigsAdapter.add(item);
                     showDialogInner(DLG_DELETION_NOT_ALLOWED, 0, false, false);
                 } else {
-                    deleteIconFileIfPresent(item, true);
                     setConfig(mActionConfigs, false);
+                    deleteIconFileIfPresent(item, true);
                     if (mActionConfigs.size() == 0) {
                         showDisableMessage(true);
                     }
@@ -234,7 +244,7 @@ public class ActionListViewSettings extends ListFragment implements
                         mPendingIndex = arg2;
                         mPendingLongpress = false;
                         mPendingNewAction = false;
-                        mPicker.pickShortcut(getId(), false, false, true);
+                        mPicker.pickShortcut(getId());
                     }
                 }
             }
@@ -527,6 +537,7 @@ public class ActionListViewSettings extends ListFragment implements
         menu.add(0, MENU_ADD, 0, R.string.shortcut_action_add)
                 .setIcon(R.drawable.ic_menu_add_white)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
     }
 
     private void addNewAction(String action, String description) {
@@ -566,6 +577,12 @@ public class ActionListViewSettings extends ListFragment implements
             case SHAKE_EVENTS_DISABLED:
                 return ActionHelper.getDisabledShakeApps(mActivity);
 */
+            case RECENT_APP_SIDEBAR:
+                return ActionHelper.getRecentAppSidebarConfigWithDescription(
+                        mActivity, mActionValuesKey, mActionEntriesKey);
+			case NAV_BAR:
+                return ActionHelper.getNavBarConfigWithDescription(
+                    mActivity, mActionValuesKey, mActionEntriesKey);			
         }
         return null;
     }
@@ -599,6 +616,11 @@ public class ActionListViewSettings extends ListFragment implements
                 ActionHelper.setDisabledShakeApps(mActivity, actionConfigs, reset);
                 break;
 */
+            case RECENT_APP_SIDEBAR:
+                ActionHelper.setRecentAppSidebarConfig(mActivity, actionConfigs, reset);
+                break;
+			case NAV_BAR:
+                ActionHelper.setNavBarConfig(mActivity, actionConfigs, reset);	
         }
     }
 
@@ -666,6 +688,11 @@ public class ActionListViewSettings extends ListFragment implements
                         iconUri), 36);
             }
 
+            if ((iconUri.equals(ActionConstants.ICON_EMPTY) &&
+                    getItem(position).getClickAction().startsWith("**")) || (iconUri != null
+                    && iconUri.startsWith(ActionConstants.SYSTEM_ICON_IDENTIFIER))) {
+                if (d != null) d.setTint(getResources().getColor(R.color.dslv_icon_dark));
+            }
             holder.iconView.setImageDrawable(d);
 
             if (!mDisableIconPicker && holder.iconView.getDrawable() != null) {
@@ -769,6 +796,7 @@ public class ActionListViewSettings extends ListFragment implements
                         case NAV_RING:
                         case PIE:
                         case PIE_SECOND:
+                        case RECENT_APP_SIDEBAR:
                         default:
                             actionMode = res.getString(R.string.shortcut_action_help_button);
                             break;
@@ -795,6 +823,12 @@ public class ActionListViewSettings extends ListFragment implements
                     })
                     .create();
                 case DLG_DELETION_NOT_ALLOWED:
+                    int message;
+                    if (getOwner().mActionConfigs.size() > 1) {
+                        message = R.string.shortcut_action_required_warning_message;
+                    } else {
+                        message = R.string.shortcut_action_warning_message;
+                    }
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.shortcut_action_warning)
                     .setMessage(R.string.shortcut_action_warning_message)
@@ -949,6 +983,7 @@ public class ActionListViewSettings extends ListFragment implements
             public IconAdapter() {
                 labels = getResources().getStringArray(R.array.shortcut_icon_picker_labels);
                 icons = getResources().obtainTypedArray(R.array.shortcut_icon_picker_icons);
+                color = getResources().getColor(R.color.dslv_icon_dark);
             }
 
             @Override
@@ -983,12 +1018,11 @@ public class ActionListViewSettings extends ListFragment implements
                 TextView tt = (TextView) iView.findViewById(android.R.id.text1);
                 tt.setText(labels[position]);
                 Drawable ic = ((Drawable) getItem(position)).mutate();
+                ic.setTint(color);
                 tt.setCompoundDrawablePadding(15);
                 tt.setCompoundDrawablesWithIntrinsicBounds(ic, null, null, null);
                 return iView;
             }
         }
-
     }
-
 }

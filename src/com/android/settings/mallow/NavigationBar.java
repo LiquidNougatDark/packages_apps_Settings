@@ -1,44 +1,79 @@
 /*
-* Copyright (C) 2015 MallowRom
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+
+ * Copyright (C) 2014 Screw'd Android
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.android.settings.mallow;
 
-import com.android.internal.logging.MetricsLogger;
-
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.SystemProperties;
+import android.provider.Settings;
 import android.preference.ListPreference;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SlimSeekBarPreference;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.internal.util.slim.Action;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.util.slim.Action;
+import com.android.internal.util.slim.DeviceUtils;
+import java.util.ArrayList;
+import java.util.List;
 
-public class NavigationBar extends SettingsPreferenceFragment implements
-        OnPreferenceChangeListener {
+import com.android.internal.logging.MetricsLogger;
 
-    private static final String DIM_NAV_BUTTONS = "dim_nav_buttons";
+public class NavigationBar extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
+
+    private static final String TAG = "NavigationBar";
+
+    private static final String PREF_MENU_LOCATION = "pref_navbar_menu_location";
+    private static final String PREF_NAVBAR_MENU_DISPLAY = "pref_navbar_menu_display";
+    private static final String ENABLE_NAVIGATION_BAR = "enable_nav_bar";
+    private static final String PREF_BUTTON = "navbar_button_settings";
+    private static final String PREF_STYLE_DIMEN = "navbar_style_dimen_settings";
+    private static final String PREF_NAVIGATION_BAR_CAN_MOVE = "navbar_can_move";
+	
+	private static final String DIM_NAV_BUTTONS = "dim_nav_buttons";
     private static final String DIM_NAV_BUTTONS_TIMEOUT = "dim_nav_buttons_timeout";
     private static final String DIM_NAV_BUTTONS_ALPHA = "dim_nav_buttons_alpha";
     private static final String DIM_NAV_BUTTONS_ANIMATE = "dim_nav_buttons_animate";
     private static final String DIM_NAV_BUTTONS_ANIMATE_DURATION = "dim_nav_buttons_animate_duration";
     private static final String DIM_NAV_BUTTONS_TOUCH_ANYWHERE = "dim_nav_buttons_touch_anywhere";
+	
+	private int mNavBarMenuDisplayValue;
+
+    ListPreference mMenuDisplayLocation;
+    ListPreference mNavBarMenuDisplay;
+    SwitchPreference mEnableNavigationBar;
+    SwitchPreference mNavigationBarCanMove;
+    PreferenceScreen mButtonPreference;
+    PreferenceScreen mStyleDimenPreference;
 
     private SwitchPreference mDimNavButtons;
     private SlimSeekBarPreference mDimNavButtonsTimeout;
@@ -52,6 +87,39 @@ public class NavigationBar extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.navigation_bar);
+		
+		Activity activity = getActivity();
+		
+		ContentResolver resolver = getActivity().getContentResolver();
+		PreferenceScreen prefSet = getPreferenceScreen();
+		
+		mMenuDisplayLocation = (ListPreference) findPreference(PREF_MENU_LOCATION);
+        mMenuDisplayLocation.setValue(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.MENU_LOCATION,
+                0) + "");
+        mMenuDisplayLocation.setOnPreferenceChangeListener(this);
+
+        mNavBarMenuDisplay = (ListPreference) findPreference(PREF_NAVBAR_MENU_DISPLAY);
+        mNavBarMenuDisplayValue = Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.MENU_VISIBILITY,
+                2);
+        mNavBarMenuDisplay.setValue(mNavBarMenuDisplayValue + "");
+        mNavBarMenuDisplay.setOnPreferenceChangeListener(this);
+
+        mButtonPreference = (PreferenceScreen) findPreference(PREF_BUTTON);
+        mStyleDimenPreference = (PreferenceScreen) findPreference(PREF_STYLE_DIMEN);
+
+        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_SHOW, 1) == 1;
+        mEnableNavigationBar = (SwitchPreference) findPreference(ENABLE_NAVIGATION_BAR);
+        mEnableNavigationBar.setChecked(enableNavigationBar);
+        mEnableNavigationBar.setOnPreferenceChangeListener(this);
+
+        mNavigationBarCanMove = (SwitchPreference) findPreference(PREF_NAVIGATION_BAR_CAN_MOVE);
+        mNavigationBarCanMove.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_CAN_MOVE,
+                DeviceUtils.isPhone(getActivity()) ? 1 : 0) == 0);
+        mNavigationBarCanMove.setOnPreferenceChangeListener(this);
 
         // SlimDim
         mDimNavButtons = (SwitchPreference) findPreference(DIM_NAV_BUTTONS);
@@ -86,13 +154,8 @@ public class NavigationBar extends SettingsPreferenceFragment implements
 
         updateSettings();
     }
-
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
-    }
-
-    private void updateSettings() {
+	
+	private void updateSettings() {
         boolean enableNavigationBar = Action.isNavBarEnabled(getActivity());
 
         if (mDimNavButtons != null) {
@@ -132,9 +195,16 @@ public class NavigationBar extends SettingsPreferenceFragment implements
 
         updateNavbarPreferences(enableNavigationBar);
     }
-
-    private void updateNavbarPreferences(boolean show) {
-        mDimNavButtons.setEnabled(show);
+	
+	private void updateNavbarPreferences(boolean show) {
+        mNavBarMenuDisplay.setEnabled(show);
+        mButtonPreference.setEnabled(show);
+        mStyleDimenPreference.setEnabled(show);
+        mNavigationBarCanMove.setEnabled(show);
+        mMenuDisplayLocation.setEnabled(show
+            && mNavBarMenuDisplayValue != 1);
+		
+		mDimNavButtons.setEnabled(show);
         mDimNavButtonsTouchAnywhere.setEnabled(show);
         mDimNavButtonsTimeout.setEnabled(show);
         mDimNavButtonsAlpha.setEnabled(show);
@@ -142,9 +212,39 @@ public class NavigationBar extends SettingsPreferenceFragment implements
         mDimNavButtonsAnimateDuration.setEnabled(show);
     }
 
+	@Override
+	protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATION;
+    }
+
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mDimNavButtons) {
+		if (preference == mMenuDisplayLocation) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.MENU_LOCATION, Integer.parseInt((String) newValue));
+            return true;
+        } else if (preference == mNavBarMenuDisplay) {
+            mNavBarMenuDisplayValue = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.MENU_VISIBILITY, mNavBarMenuDisplayValue);
+            mMenuDisplayLocation.setEnabled(mNavBarMenuDisplayValue != 1);
+            return true;
+        } else if (preference == mEnableNavigationBar) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_SHOW,
+                    ((Boolean) newValue) ? 1 : 0);
+            updateNavbarPreferences((Boolean) newValue);
+            return true;
+        } else if (preference == mNavigationBarCanMove) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_CAN_MOVE,
+                    ((Boolean) newValue) ? 0 : 1);
+            return true;
+        } else if (preference == mDimNavButtons) {
             Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.DIM_NAV_BUTTONS,
                     ((Boolean) newValue) ? 1 : 0);
