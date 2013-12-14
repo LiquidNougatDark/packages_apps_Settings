@@ -1499,4 +1499,11 @@
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>
 
+    <!-- Slim Shortcuts -->
+    <string name="slim_shortcut_picker">Slim Shortcuts</string>
+
+    <!-- Chamber of Secrets -->
+    <string name="chamber_title">House of Lean</string>
+    <string name="chamber_toast">Lean is ready, pour me a cup!</string>
+
 </resources>
