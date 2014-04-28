@@ -19,6 +19,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
+        android:key="app_sidebars"
+        android:title="@string/app_sidebars_title"
+        android:summary="@string/app_sidebars_summary"
+        android:fragment="com.android.settings.mallow.AppSidebar" />
+
+    <PreferenceScreen
         android:key="battery_styles"
         android:title="@string/battery_styles_title"
         android:summary="@string/battery_styles_summary"
