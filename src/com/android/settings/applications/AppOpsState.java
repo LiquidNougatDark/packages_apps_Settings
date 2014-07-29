@@ -167,7 +167,7 @@ public class AppOpsState {
                     AppOpsManager.OP_AUDIO_ALARM_VOLUME,
                     AppOpsManager.OP_AUDIO_NOTIFICATION_VOLUME,
                     AppOpsManager.OP_AUDIO_BLUETOOTH_VOLUME,
-                    AppOpsManager.OP_MUTE_MICROPHONE},
+                    AppOpsManager.OP_MUTE_MICROPHONE },
             new boolean[] { false,
                     true,
                     true,
@@ -196,7 +196,7 @@ public class AppOpsState {
                     AppOpsManager.OP_ASSIST_STRUCTURE,
                     AppOpsManager.OP_ASSIST_SCREENSHOT,
                     AppOpsManager.OP_WIFI_CHANGE,
-                    AppOpsManager.OP_BLUETOOTH_CHANGE},
+                    AppOpsManager.OP_DATA_CONNECT_CHANGE },
             new boolean[] { false,
                     true,
                     true,
@@ -207,6 +207,7 @@ public class AppOpsState {
                     false,
                     false,
                     false,
+                    true,
                     true,
                     true }
             );
