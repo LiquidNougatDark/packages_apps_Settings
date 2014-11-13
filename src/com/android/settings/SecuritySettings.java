@@ -116,6 +116,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
+    private PackageManager mPM;
     private DevicePolicyManager mDPM;
     private SubscriptionManager mSubscriptionManager;
 
@@ -205,6 +206,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
+        // Add package manager to check if features are available
+        PackageManager pm = getActivity().getPackageManager();
 
         // Add options for lock/unlock screen
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils);
