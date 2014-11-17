@@ -2513,8 +2513,10 @@
                 android:value="com.android.settings.mallow.MallowTweaks" />
         </activity>
 
-        <activity
-            android:name=".mallow.MallowTweaks" />
+        <!-- Mallow activities-->
+        <activity android:name=".mallow.MallowTweaks" />
+        <activity android:name=".notificationlight.NotificationLightSettings" />
+        <activity android:name=".notificationlight.BatteryLightSettings" />
 
         <provider
             android:name=".search.SettingsSearchIndexablesProvider"
