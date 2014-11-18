@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.screwd;
+package com.android.settings.mallow;
 
 import android.content.Context;
 import android.content.ContentResolver;
