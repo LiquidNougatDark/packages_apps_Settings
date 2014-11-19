@@ -54,4 +54,10 @@
         android:summary="@string/screen_gestures_summary"
         android:fragment="com.android.settings.mallow.ScreenGestures" />
 
+    <PreferenceScreen
+        android:key="sound_settings"
+        android:title="@string/sound_settings_title"
+        android:summary="@string/sound_settings_summary"
+        android:fragment="com.android.settings.mallow.SoundSettings" />
+
 </PreferenceScreen>
