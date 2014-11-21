@@ -31,6 +31,12 @@
         android:fragment="com.android.settings.mallow.ClockStyles" />
 
     <PreferenceScreen
+        android:key="notification_drawer"
+        android:title="@string/notification_drawer_title"
+        android:summary="@string/notification_drawer_summary"
+        android:fragment="com.android.settings.mallow.NotificationDrawer" />
+
+    <PreferenceScreen
         android:key="screen_gestures"
         android:title="@string/screen_gestures_title"
         android:summary="@string/screen_gestures_summary"
