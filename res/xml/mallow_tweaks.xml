@@ -24,4 +24,10 @@
         android:summary="@string/battery_styles_summary"
         android:fragment="com.android.settings.mallow.BatteryStyles" />
 
+    <PreferenceScreen
+        android:key="clock_styles"
+        android:title="@string/clock_styles_title"
+        android:summary="@string/clock_styles_summary"
+        android:fragment="com.android.settings.mallow.ClockStyles" />
+
 </PreferenceScreen>
