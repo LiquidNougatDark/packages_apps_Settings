@@ -14,14 +14,22 @@
      limitations under the License.
 -->
 <PreferenceScreen
+    android:title="@string/battery_styles_title"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/mallow_tweaks_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen
-        android:key="battery_styles"
-        android:title="@string/battery_styles_title"
-        android:summary="@string/battery_styles_summary"
-        android:fragment="com.android.settings.mallow.BatteryStyles" />
+    <ListPreference
+        android:key="status_bar_battery_style"
+        android:title="@string/status_bar_battery_style_title"
+        android:dialogTitle="@string/status_bar_battery_style_title"
+        android:entries="@array/status_bar_battery_style_entries"
+        android:entryValues="@array/status_bar_battery_style_values" />
+
+    <ListPreference
+        android:key="status_bar_show_battery_percent"
+        android:title="@string/status_bar_battery_percentage_title"
+        android:dialogTitle="@string/status_bar_battery_percentage_dialog_title"
+        android:entries="@array/status_bar_battery_percentage_entries"
+        android:entryValues="@array/status_bar_battery_percentage_values" />
 
 </PreferenceScreen>
