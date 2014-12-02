@@ -251,4 +251,12 @@
     <string name="wakeup_when_plugged_unplugged_title">Wakeup on charge</string>
     <string name="wakeup_when_plugged_unplugged_summary">Wakeup device if charger is plugged/unplugged.</string>
 
+    <!-- Recent apps -->
+    <string name="recent_apps_title">Recent apps</string>
+    <string name="recent_apps_summary">Hide search bar or view memory usage</string>
+
+    <!-- Recents search bar -->
+    <string name="recents_show_searchbar">Enable search bar</string>
+    <string name="recents_show_searchbar_summary">Show the search bar in the recents menu</string>
+
 </resources>

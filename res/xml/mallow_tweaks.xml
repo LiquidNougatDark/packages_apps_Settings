@@ -49,6 +49,12 @@
         android:fragment="com.android.settings.mallow.PowerMenu" />
 
     <PreferenceScreen
+        android:key="recent_apps"
+        android:title="@string/recent_apps_title"
+        android:summary="@string/recent_apps_summary"
+        android:fragment="com.android.settings.mallow.RecentApps" />
+
+    <PreferenceScreen
         android:key="screen_gestures"
         android:title="@string/screen_gestures_title"
         android:summary="@string/screen_gestures_summary"
