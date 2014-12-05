@@ -360,4 +360,12 @@
     <string name="media_art_title">Media cover art</string>
     <string name="media_art_summary">Enable media cover art on the lockscreen</string>
 
+    <!-- Status bar -->
+    <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_summary">Customize icons and notifications</string>
+
+    <!-- Notification counters -->
+    <string name="status_bar_notif_count_title">Show notification count</string>
+    <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
+
 </resources>
