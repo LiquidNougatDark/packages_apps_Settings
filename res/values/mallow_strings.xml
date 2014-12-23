@@ -87,6 +87,9 @@
     <!-- Theme chooser -->
     <string name="themes_settings_title">Theme chooser</string>
 
+    <!-- Viper4Android -->
+    <string name="viper_audio_title">Viper4Android</string>
+
     <!-- Superuser -->
     <string name="supersu_title">Superuser</string>
 
@@ -1503,7 +1506,7 @@
     <!-- Hide Apps from Recents -->
     <string name="hide_apps_from_recents_title">Hidden Apps</string>
     <string name="hide_from_recents_add_app">Add App</string>
-    <string name="hide_apps_from_recents_summary">Pick which apps to exclude from the recents panel.</string>
+    <string name="hide_apps_from_recents_summary">Pick which apps to exclude from the recents panel</string>
 
     <!-- Floating windows -->
     <string name="floating_windows_title">Floating windows</string>
