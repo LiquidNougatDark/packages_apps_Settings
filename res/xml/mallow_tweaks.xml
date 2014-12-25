@@ -37,6 +37,12 @@
         android:fragment="com.android.settings.mallow.LockScreen" />
 
     <PreferenceScreen
+        android:key="navigation_bar"
+        android:title="@string/navigation_bar_title"
+        android:summary="@string/navigation_bar_summary"
+        android:fragment="com.android.settings.mallow.NavigationBar" />
+
+    <PreferenceScreen
         android:key="notification_drawer"
         android:title="@string/notification_drawer_title"
         android:summary="@string/notification_drawer_summary"

@@ -368,4 +368,12 @@
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
 
+    <!-- Navigation bar -->
+    <string name="navigation_bar_title">Navigation bar</string>
+    <string name="navigation_bar_summary">Change and modify your system navbar</string>
+
+    <!-- Left handed navbar -->
+    <string name="navigation_bar_left_title">Left-handed mode</string>
+    <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
+
 </resources>
