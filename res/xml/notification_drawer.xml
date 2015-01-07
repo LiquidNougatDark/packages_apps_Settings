@@ -39,6 +39,12 @@
 	    android:summary="@string/qs_main_tiles_summary"
         android:defaultValue="true" />
 
+	<com.android.settings.mallow.SecureSettingSwitchPreference
+        android:key="qs_location_advanced"
+        android:title="@string/qs_advanced_location_title"
+        android:summary="@string/qs_advanced_location_summary"
+        android:defaultValue="false" />
+
     <ListPreference
         android:key="sysui_qs_num_columns"
         android:title="@string/qs_num_columns_title"
