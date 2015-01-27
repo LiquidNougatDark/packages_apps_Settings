@@ -18,6 +18,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceScreen
+        android:key="network_traffic"
+        android:fragment="com.android.settings.mallow.NetworkTraffic"
+        android:title="@string/network_traffic_title"
+        android:summary="@string/network_traffic_summary" />
+
     <com.android.settings.mallow.SystemSettingSwitchPreference
         android:key="status_bar_notif_count"
         android:title="@string/status_bar_notif_count_title"
