@@ -21,6 +21,16 @@
     <string name="mallow_version_title">Mallow version</string>
     <string name="mallow_version_default">Unknown</string>
 
+    <!-- Color picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+
     <!-- GCC version info -->
     <string name="sm_android">Gcc android version</string>
     <string name="sm_android_default">Unknown</string>
