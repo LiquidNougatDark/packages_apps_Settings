@@ -92,6 +92,17 @@
             android:id="@+id/device_personalization"
             android:title="@string/header_category_personalization" >
 
+	    <!-- Kernel auditor -->
+        <dashboard-tile
+                android:id="@+id/kernel_auditor"
+                android:icon="@drawable/ic_settings_performance"
+                android:title="@string/kernel_auditor_title">
+                <intent
+                    android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.grarak.kerneladiutor"
+                    android:targetClass="com.grarak.kerneladiutor.MainActivity" />
+        </dashboard-tile>
+
         <!-- Mallow tweaks -->
         <dashboard-tile
                 android:id="@+id/mallow_tweaks"
@@ -100,7 +111,7 @@
                 android:icon="@drawable/ic_settings_mallow"
                 />
 
-        <!-- Themes -->
+        <!-- Theme chooser -->
         <dashboard-tile
             android:id="@+id/theme_settings"
             android:title="@string/themes_settings_title"
