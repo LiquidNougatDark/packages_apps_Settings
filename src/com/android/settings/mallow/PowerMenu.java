@@ -20,35 +20,37 @@ import android.content.Context;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SlimSeekBarPreference;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-
-import com.android.internal.logging.MetricsLogger;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.cm.PowerMenuConstants;
+
 import static com.android.internal.util.cm.PowerMenuConstants.*;
+import com.android.settings.widget.NumberPickerPreference;
 
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PowerMenu extends SettingsPreferenceFragment
-         implements OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener {
 
-    final static String TAG = "PowerMenuActions";
+    final static String TAG = "PowerMenu";
 
-    private static final String POWER_MENU_ONTHEGO_ENABLED = "power_menu_onthego_enabled";
     private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";
+    private static final String PREF_SCREENSHOT_DELAY = "screenshot_delay";
 
     private SwitchPreference mRebootPref;
     private SwitchPreference mScreenshotPref;
@@ -59,7 +61,6 @@ public class PowerMenu extends SettingsPreferenceFragment
     private SwitchPreference mLockdownPref;
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
-    private SwitchPreference mOnTheGoPowerMenu;
     private SlimSeekBarPreference mOnTheGoAlphaPref;
 
     Context mContext;
@@ -67,29 +68,31 @@ public class PowerMenu extends SettingsPreferenceFragment
     private String[] mAvailableActions;
     private String[] mAllActions;
 
+    private NumberPickerPreference mScreenshotDelay;
+
+    private ContentResolver mCr;
+    private PreferenceScreen mPrefSet;
+
+    private static final int MIN_DELAY_VALUE = 1;
+    private static final int MAX_DELAY_VALUE = 30;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.power_menu);
+        addPreferencesFromResource(R.xml.power_menu_settings);
         mContext = getActivity().getApplicationContext();
+
+        mPrefSet = getPreferenceScreen();
+
+        mCr = getActivity().getContentResolver();
 
         mAvailableActions = getActivity().getResources().getStringArray(
                 R.array.power_menu_actions_array);
         mAllActions = PowerMenuConstants.getAllActions();
 
-        mOnTheGoPowerMenu = (SwitchPreference) findPreference(POWER_MENU_ONTHEGO_ENABLED);
-        mOnTheGoPowerMenu.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_ONTHEGO_ENABLED, 0) == 1));
-        mOnTheGoPowerMenu.setOnPreferenceChangeListener(this);
-
-        mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
-        mOnTheGoAlphaPref.setDefault(50);
-        mOnTheGoAlphaPref.setInterval(1);
-        mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
-
         for (String action : mAllActions) {
-            // Remove preferences not present in the overlay
+        // Remove preferences not present in the overlay
             if (!isActionAllowed(action)) {
                 getPreferenceScreen().removePreference(findPreference(action));
                 continue;
@@ -115,6 +118,20 @@ public class PowerMenu extends SettingsPreferenceFragment
                 mSilentPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
             }
         }
+
+        mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
+        mOnTheGoAlphaPref.setDefault(50);
+        mOnTheGoAlphaPref.setInterval(1);
+        mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
+
+        mScreenshotDelay = (NumberPickerPreference) mPrefSet.findPreference(
+                PREF_SCREENSHOT_DELAY);
+        mScreenshotDelay.setOnPreferenceChangeListener(this);
+        mScreenshotDelay.setMinValue(MIN_DELAY_VALUE);
+        mScreenshotDelay.setMaxValue(MAX_DELAY_VALUE);
+        int ssDelay = Settings.System.getInt(mCr,
+                Settings.System.SCREENSHOT_DELAY, 1);
+        mScreenshotDelay.setCurrentValue(ssDelay);
 
         getUserConfig();
     }
@@ -147,7 +164,6 @@ public class PowerMenu extends SettingsPreferenceFragment
         if (mUsersPref != null) {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
                 getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
-                mUsersPref = null;
             } else {
                 List<UserInfo> users = ((UserManager) mContext.getSystemService(
                         Context.USER_SERVICE)).getUsers();
@@ -177,29 +193,13 @@ public class PowerMenu extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mOnTheGoPowerMenu) {
-            boolean value = ((Boolean)newValue).booleanValue();
-            Settings.System.putInt(getContentResolver(), Settings.System.POWER_MENU_ONTHEGO_ENABLED, value ? 1 : 0);
-            return true;
-        } else if (preference == mOnTheGoAlphaPref) {
-            float val = Float.parseFloat((String) newValue);
-            Settings.System.putFloat(getContentResolver(), Settings.System.ON_THE_GO_ALPHA,
-                    val / 100);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         updatePreferences();
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, @NonNull Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
 
         if (preference == mRebootPref) {
@@ -244,6 +244,22 @@ public class PowerMenu extends SettingsPreferenceFragment
         return true;
     }
 
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mOnTheGoAlphaPref) {
+            float val = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(mCr, Settings.System.ON_THE_GO_ALPHA,
+                    val / 100);
+            return true;
+        } else if (preference == mScreenshotDelay) {
+            int value = Integer.parseInt(newValue.toString());
+            Settings.System.putInt(mCr, Settings.System.SCREENSHOT_DELAY,
+                    value);
+            return true;
+        }
+        return false;
+    }
+
     private boolean settingsArrayContains(String preference) {
         return mLocalUserConfig.contains(preference);
     }
@@ -269,9 +285,8 @@ public class PowerMenu extends SettingsPreferenceFragment
     }
 
     private void updatePreferences() {
-        boolean bugreport = Settings.Secure.getInt(getActivity().getContentResolver(),
+        boolean bugreport = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
-
         if (mBugReportPref != null) {
             mBugReportPref.setEnabled(bugreport);
             if (bugreport) {
@@ -321,7 +336,7 @@ public class PowerMenu extends SettingsPreferenceFragment
             }
         }
 
-        Settings.Global.putStringForUser(getActivity().getContentResolver(),
+        Settings.Global.putStringForUser(getContentResolver(),
                  Settings.Global.POWER_MENU_ACTIONS, s.toString(), UserHandle.USER_CURRENT);
         updatePowerMenuDialog();
     }
