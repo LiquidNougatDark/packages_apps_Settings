@@ -37,4 +37,8 @@
     <color name="blacklist_enabled">#DD2C00</color>
     <color name="blacklist_disabled">#D7D7D7</color>
 
+    <!-- Color picker -->
+    <color name="divider">#1fffffff</color>
+    <color name="ripple_material_dark">#4dffffff</color>
+
 </resources>
