@@ -126,6 +126,7 @@
     <string name="notification_light_default_value">Default</string>
     <string name="notification_light_missed_call_title">Missed call</string>
     <string name="notification_light_voicemail_title">Voicemail</string>
+    <string name="allow_lights_title">Allow notification lights in do not disturb mode</string>
 
     <!-- Battery styles -->
     <string name="battery_styles_title">Battery styles</string>
@@ -718,7 +719,6 @@
     <string name="shortcut_action_help_delete_last_entry">Removing every %1$s in the list will disable the feature entirely.</string>
     <string name="shortcut_action_help_pie_second_layer_delete_last_entry">Removing every %1$s in the list will disable the second pie layer entirely.</string>
 
-<<<<<<< HEAD
     <!-- Lockscreen shortcuts -->
     <string name="lockscreen_shortcuts_category">Shortcuts</string>
     <string name="lockscreen_shortcuts_title">Lockscreen Shortcuts</string>
