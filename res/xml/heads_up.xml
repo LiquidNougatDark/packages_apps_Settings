@@ -25,6 +25,28 @@
             android:summaryOff="@string/summary_heads_up_disabled"
             android:defaultValue="true" />
 
+    <PreferenceCategory
+            android:title="@string/heads_up_dnd_title"
+            android:key="dnd_applications_list"
+            android:dependency="heads_up_notifications_enabled" >
+        <Preference
+            android:key="add_dnd_packages"
+            android:icon="@drawable/ic_menu_add_dark"
+            android:title="@string/add_heads_up_package"
+            android:summary="@string/add_heads_up_dnd_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/heads_up_blacklist_title"
+            android:key="blacklist_applications"
+            android:dependency="heads_up_notifications_enabled" >
+        <Preference
+            android:key="add_blacklist_packages"
+            android:icon="@drawable/ic_menu_add_dark"
+            android:title="@string/add_heads_up_package"
+            android:summary="@string/add_heads_up_blacklist_summary" />
+    </PreferenceCategory>
+
     <com.android.settings.widget.SeekBarPreferenceCHOS
             android:key="heads_up_snooze_length_ms"
             android:title="@string/heads_up_snooze"
