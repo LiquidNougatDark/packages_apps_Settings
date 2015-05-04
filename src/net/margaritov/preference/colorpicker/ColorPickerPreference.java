@@ -80,7 +80,7 @@ public class ColorPickerPreference extends Preference implements
         mDensity = getContext().getResources().getDisplayMetrics().density;
         setOnPreferenceClickListener(this);
         if (attrs != null) {
-            mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, "alphaSlider", false);
+            mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, "alphaSlider", true);
         }
     }
 
