@@ -27,5 +27,8 @@
     <!-- Model name -->
     <string name="model_name">Model name</string>
 
+    <!-- Development settings -->
+    <string name="show_dev_already_enabled">No Need, Development settings are enabled by default.</string>
+
 </resources>
 
