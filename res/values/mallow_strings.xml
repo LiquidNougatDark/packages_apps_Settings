@@ -35,4 +35,7 @@
     <!-- Bluetooth settings. A checkbox to set if we should accept all the file types regardless of their presence in MIME type whitelist -->
     <string name="bluetooth_accept_all_files">Accept all file types</string>
 
+    <!-- Dev Options Enabled by Default -->
+    <string name="show_dev_already_enabled">No need, development settings are enabled by default.</string>
+
 </resources>

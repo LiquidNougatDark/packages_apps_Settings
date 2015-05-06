@@ -81,7 +81,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_SM_AND = "sm_android";
     private static final String KEY_SM_FLAGS = "sm_flags";
 
-    static final int TAPS_TO_BE_A_DEVELOPER = 7;
+    /* Reduced taps from 7 to 3 for developer options */
+    static final int TAPS_TO_BE_A_DEVELOPER = 3;
 
     long[] mHits = new long[3];
     int mDevHitCountdown;
@@ -175,7 +176,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         super.onResume();
         mDevHitCountdown = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
-                        android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
+                        android.os.Build.TYPE.equals("eng") || android.os.Build.TYPE.equals("userdebug") || android.os.Build.TYPE.equals("user")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
         mDevHitToast = null;
     }
 
@@ -244,7 +245,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 if (mDevHitToast != null) {
                     mDevHitToast.cancel();
                 }
-                mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_already,
+                mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_already_enabled,
                         Toast.LENGTH_LONG);
                 mDevHitToast.show();
             }
