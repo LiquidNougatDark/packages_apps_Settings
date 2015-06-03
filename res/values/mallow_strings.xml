@@ -1459,4 +1459,7 @@
     <string name="doze_wakeup_doubletap_summary_on">Require a double-tap to wake the device on a doze pulse screen</string>
     <string name="doze_wakeup_doubletap_summary_off">Require a simple-tap to wake the device on a doze pulse screen (default)</string>
 
+    <!-- WiFi auto-configure priorities -->
+    <string name="wifi_auto_config_priorities">Automatic priority</string>
+
 </resources>
