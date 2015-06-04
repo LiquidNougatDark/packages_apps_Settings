@@ -1118,4 +1118,8 @@
     <!-- Power menu and dialogs transparency -->
     <string name="power_menu_transparency">Power/reboot menu transparency</string>
 
+    <!-- Navbar cursor buttons -->
+    <string name="show_ime_arrows_title">Show arrow keys while typing</string>
+    <string name="show_ime_arrows_summary">Display left and right cursor buttons for IME</string>
+
 </resources>
