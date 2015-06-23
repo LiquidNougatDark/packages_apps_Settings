@@ -24,6 +24,12 @@
         android:summary="@string/system_animation_summary"
         android:fragment="com.android.settings.mallow.animation.AnimationControls" />
 
+    <com.android.settings.mallow.SystemSettingSwitchPreference
+        android:key="disable_transition_animations"
+        android:title="@string/disable_animations"
+        android:summary="@string/disable_animations_summary"
+        android:defaultValue="false" />
+
     <ListPreference
     	android:key="power_menu_animations"
         android:title="@string/power_menu_animation_title"
