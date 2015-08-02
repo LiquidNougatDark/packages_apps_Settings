@@ -31,6 +31,12 @@
         android:fragment="com.android.settings.mallow.ClockStyles" />
 
     <PreferenceScreen
+        android:key="lock_screen"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary"
+        android:fragment="com.android.settings.mallow.LockScreen" />
+
+    <PreferenceScreen
         android:key="notification_drawer"
         android:title="@string/notification_drawer_title"
         android:summary="@string/notification_drawer_summary"

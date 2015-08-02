@@ -200,4 +200,14 @@
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
 
+    <!-- Lock screen -->
+    <string name="lock_screen_title">Lock screen</string>
+    <string name="lock_screen_summary">Change wallpaper or create shortcuts</string>
+
+    <!-- Lock screen wallpaper -->
+    <string name="lockscreen_wallpaper_title">Wallpaper</string>
+    <string name="lockscreen_wallpaper_set_title">Set lock screen wallpaper</string>
+    <string name="lockscreen_wallpaper_clear_title">Clear lock screen wallpaper</string>
+    <string name="reset_lockscreen_wallpaper">Lock screen cleared</string>
+
 </resources>
