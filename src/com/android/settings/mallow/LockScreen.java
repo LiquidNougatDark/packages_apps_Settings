@@ -32,6 +32,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -104,6 +105,8 @@ public class LockScreen extends SettingsPreferenceFragment
             return true;
         } else if (preference == mClearWallpaper) {
             clearKeyguardWallpaper();
+            Toast.makeText(getView().getContext(),
+            getString(R.string.clear_lockscreen_wallpaper), Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -115,7 +118,8 @@ public class LockScreen extends SettingsPreferenceFragment
 
         if (preference == mLsBouncer) {
             int lockbouncer = Integer.valueOf((String) newValue);
-            Settings.Secure.putInt(resolver, Settings.Secure.LOCKSCREEN_BOUNCER, lockbouncer);
+            Settings.Secure.putInt(resolver,
+                    Settings.Secure.LOCKSCREEN_BOUNCER, lockbouncer);
             updateBouncerSummary(lockbouncer);
             return true;
 		} else if (preference == mLsAlpha) {
@@ -130,7 +134,7 @@ public class LockScreen extends SettingsPreferenceFragment
             return true;
         } else if (preference == mMaxKeyguardNotifConfig) {
             int kgconf = (Integer) newValue;
-            Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, kgconf);
             return true;
         }
