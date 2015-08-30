@@ -344,13 +344,6 @@
     <string name="recents_show_membar_title">Memory bar</string>
     <string name="recents_show_membar_summary">Show a bar with the device\'s available memory</string>
 
-    <string name="lockscreen_shortcuts_category">Shortcuts</string>
-    <!-- Lockscreen shortcuts -->
-    <string name="lockscreen_shortcuts_title">Lockscreen Shortcuts</string>
-    <string name="lockscreen_shortcuts_summary">Change the shortcuts on lockscreen to whatever you want</string>
-    <string name="lockscreen_shorcuts_longpress_title">Shortcuts longpress</string>
-    <string name="lockscreen_shorcuts_longpress_summary">Open custom lock screen shortcuts on longpress</string>
-
     <!-- Camera sound switch -->
     <string name="camera_sounds_title">Camera shutter sound</string>
     <string name="camera_sounds_summary">Enable system camera shutter sound</string>
@@ -524,12 +517,6 @@
     <string name="shortcut_action_help_delete_last_entry">Removing every %1$s in the list will disable the feature entirely.</string>
     <string name="shortcut_action_help_pie_second_layer_delete_last_entry">Removing every %1$s in the list will disable the second pie layer entirely.</string>
 
-    <!-- Lockscreen shortcuts -->
-    <string name="lockscreen_shortcuts_title">Lockscreen Shortcuts</string>
-    <string name="lockscreen_shortcuts_summary">Change the shortcuts on lockscreen to whatever you want</string>
-    <string name="lockscreen_shorcuts_longpress_title">Shortcuts longpress</string>
-    <string name="lockscreen_shorcuts_longpress_summary">Open custom lock screen shortcuts on longpress</string>
-
     <string name="shortcut_action_none">None</string>
     <string name="shortcut_action_app">Custom app</string>
     <string name="shortcut_action_home">Home</string>
@@ -569,5 +556,14 @@
     <string name="shortcut_action_help_main">To add a %1$s, select the Add icon. Once a %1$s is added, selecting the row will change the target%2$s\n\nTo remove a %1$s, swipe the row horizontally left or right. Re-order a %1$s in the list by vertically dragging the anchor on the left.\n\nTo clear or reset to defaults, select the reset option.</string>
     <string name="shortcut_action_help_delete_last_entry">Removing every %1$s in the list will disable the feature entirely.</string>
     <string name="shortcut_action_help_pie_second_layer_delete_last_entry">Removing every %1$s in the list will disable the second pie layer entirely.</string>
+
+    <!-- Lockscreen shortcuts -->
+    <string name="lockscreen_shortcuts_category">Shortcuts</string>
+    <string name="lockscreen_shortcuts_title">Lockscreen Shortcuts</string>
+    <string name="lockscreen_shortcuts_summary">Change the shortcuts on lockscreen to whatever you want</string>
+    <string name="lockscreen_shorcuts_launch_type_title">Shortcut click type</string>
+    <string name="lockscreen_shortcuts_single_tap">Click</string>
+    <string name="lockscreen_shortcuts_double_tap">Double tap</string>
+    <string name="lockscreen_shortcuts_longpress">Longpress</string>
 
 </resources>
