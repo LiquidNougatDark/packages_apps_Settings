@@ -17,13 +17,14 @@
 package com.android.settings.mallow;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
@@ -39,7 +40,12 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PowerMenu extends PreferenceFragment {
+public class PowerMenu extends SettingsPreferenceFragment
+         implements OnPreferenceChangeListener {
+
+    final static String TAG = "PowerMenuActions";
+
+    private static final String POWER_MENU_ONTHEGO_ENABLED = "power_menu_onthego_enabled";
 
     private SwitchPreference mRebootPref;
     private SwitchPreference mScreenshotPref;
@@ -50,6 +56,7 @@ public class PowerMenu extends PreferenceFragment {
     private SwitchPreference mLockdownPref;
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
+    private SwitchPreference mOnTheGoPowerMenu;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -66,6 +73,11 @@ public class PowerMenu extends PreferenceFragment {
         mAvailableActions = getActivity().getResources().getStringArray(
                 R.array.power_menu_actions_array);
         mAllActions = PowerMenuConstants.getAllActions();
+
+        mOnTheGoPowerMenu = (SwitchPreference) findPreference(POWER_MENU_ONTHEGO_ENABLED);
+        mOnTheGoPowerMenu.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.POWER_MENU_ONTHEGO_ENABLED, 0) == 1));
+        mOnTheGoPowerMenu.setOnPreferenceChangeListener(this);
 
         for (String action : mAllActions) {
             // Remove preferences not present in the overlay
@@ -153,6 +165,17 @@ public class PowerMenu extends PreferenceFragment {
         }
 
         updatePreferences();
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mOnTheGoPowerMenu) {
+            boolean value = ((Boolean)newValue).booleanValue();
+            Settings.System.putInt(getContentResolver(), Settings.System.POWER_MENU_ONTHEGO_ENABLED, value ? 1 : 0);
+            return true;
+        }
+        return false;
     }
 
     @Override
