@@ -1036,7 +1036,7 @@
     <string name="wallpaper_intra_open_title">Wallpaper intra open animation</string>
     <string name="wallpaper_intra_close_title">Wallpaper intra close animation</string>
     <string name="animation_duration_title">Animation duration</string>
-    <string name="animation_duration_default">Default</string>
+    <string name="animation_duration_default">Duration (in milliseconds) of the above-selected system animations</string>
 
     <!-- Toast animation -->
     <string name="toast_animation_title">Toast animation</string>

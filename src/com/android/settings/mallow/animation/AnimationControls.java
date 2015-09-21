@@ -18,6 +18,8 @@
 
 package com.android.settings.mallow.animation;
 
+import com.android.internal.logging.MetricsLogger;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,17 +27,13 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.preference.SlimSeekBarPreference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.mallow.animation.AnimBarPreference;
 import com.android.settings.R;
-
-import com.android.internal.logging.MetricsLogger;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.util.mallow.AwesomeAnimationHelper;
-
-import java.util.Arrays;
 
 public class AnimationControls extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
@@ -62,16 +60,11 @@ public class AnimationControls extends SettingsPreferenceFragment
     ListPreference mWallpaperClose;
     ListPreference mWallpaperIntraOpen;
     ListPreference mWallpaperIntraClose;
-    AnimBarPreference mAnimationDuration;
+    SlimSeekBarPreference mAnimationDuration;
 
     private int[] mAnimations;
     private String[] mAnimationsStrings;
     private String[] mAnimationsNum;
-
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,11 +143,21 @@ public class AnimationControls extends SettingsPreferenceFragment
         mWallpaperIntraClose.setEntries(mAnimationsStrings);
         mWallpaperIntraClose.setEntryValues(mAnimationsNum);
 
-        int defaultDuration = Settings.System.getInt(mContentRes,
-                Settings.System.ANIMATION_CONTROLS_DURATION, 0);
-        mAnimationDuration = (AnimBarPreference) findPreference(ANIMATION_DURATION);
-        mAnimationDuration.setInitValue((int) (defaultDuration));
+        mAnimationDuration = (SlimSeekBarPreference) findPreference(ANIMATION_DURATION);
+        mAnimationDuration.setDefault(0);
+        mAnimationDuration.isMilliseconds(true);
+        mAnimationDuration.setInterval(1);
+        mAnimationDuration.minimumValue(0);
+        mAnimationDuration.multiplyValue(50);
+        final int animateDuration = Settings.System.getInt(mContentRes,
+                Settings.System.ANIMATION_CONTROLS_DURATION, 50);
+        mAnimationDuration.setInitValue((animateDuration / 50));
         mAnimationDuration.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override
@@ -232,7 +235,6 @@ public class AnimationControls extends SettingsPreferenceFragment
         } else if (preference == mWallpaperIntraClose) {
             mString = Settings.System.ACTIVITY_ANIMATION_CONTROLS[9];
         }
-
         int mNum = Settings.System.getInt(mContentRes, mString, 0);
         return mAnimationsStrings[mNum];
     }
