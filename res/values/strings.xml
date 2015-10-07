@@ -35,13 +35,13 @@
     <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
     <plurals name="show_dev_countdown">
-        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from enabling development options.</item>
-        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from enabling development options.</item>
+        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
+        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from being a developer.</item>
     </plurals>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
-    <string name="show_dev_on">You have enabled development options.</string>
+    <string name="show_dev_on">You are now a developer!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
-    <string name="show_dev_already">No need, you have already enabled development options.</string>
+    <string name="show_dev_already">No need, you are already a developer.</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
@@ -2131,7 +2131,7 @@
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="firmware_version">Android version</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
-    <string name="security_patch">Android security patch level</string>
+    <string name="security_patch">Security patch level</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_number">Model number</string>
     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
@@ -3284,7 +3284,7 @@
 
     <!-- App Ops Settings --> <skip />
     <!-- [CHAR LIMIT=NONE] App ops settings title, on main settings screen. If clicked, the user is taken to a settings screen for app operations -->
-    <string name="app_ops_settings">App ops</string>
+    <string name="app_ops_settings">App Ops</string>
     <!-- [CHAR LIMIT=NONE] App ops settings summary, on main settings screen. If clicked, the user is taken to a settings screen for app operations -->
     <string name="app_ops_settings_summary">View or change app permissions</string>
     <!-- [CHAR LIMIT=NONE] Time label for an operation that is currently running. -->
@@ -6655,7 +6655,7 @@
    <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed</string>
 
    <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
-   <string name="tap_to_wake">Tap to wake</string>
+   <string name="tap_to_wake">Double-tap to wake</string>
 
    <!-- Summary for take to wake setting [CHAR LIMIT=90] -->
    <string name="tap_to_wake_summary">Double-tap anywhere on the screen to wake device</string>
@@ -7081,4 +7081,5 @@
 
     <!-- Description of feature to change color setting for the display [CHAR LIMIT=NONE] -->
     <string name="picture_color_mode_desc">Use sRGB</string>
+
 </resources>
