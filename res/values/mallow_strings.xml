@@ -44,6 +44,10 @@
     <string name="uber_flags">Optimizations</string>
     <string name="uber_flags_default">None</string>
 
+    <!-- Changelog -->
+    <string name="changelog_mallow_title">Changelog</string>
+    <string name="changelog_mallow_error">Unable to load changelog</string>
+
     <!-- Clang version info -->
     <string name="dtc_version">Clang</string>
     <string name="dtc_version_default">None</string>
