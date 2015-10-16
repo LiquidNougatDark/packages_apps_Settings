@@ -247,4 +247,8 @@
     <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
     <string name="volume_button_toggle_info">Volume rocker wake must be disabled</string>
 
+    <!-- Wakeup on charge -->
+    <string name="wakeup_when_plugged_unplugged_title">Wakeup on charge</string>
+    <string name="wakeup_when_plugged_unplugged_summary">Wakeup device if charger is plugged/unplugged.</string>
+
 </resources>
