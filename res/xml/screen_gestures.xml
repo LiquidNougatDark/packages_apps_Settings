@@ -14,26 +14,19 @@
      limitations under the License.
 -->
 <PreferenceScreen
+    android:title="@string/screen_gestures_title"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/mallow_tweaks_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen
-        android:key="battery_styles"
-        android:title="@string/battery_styles_title"
-        android:summary="@string/battery_styles_summary"
-        android:fragment="com.android.settings.mallow.BatteryStyles" />
+    <PreferenceCategory
+        android:key="category_gesture_options"
+        android:title="@string/gestures_title" >
 
-    <PreferenceScreen
-        android:key="clock_styles"
-        android:title="@string/clock_styles_title"
-        android:summary="@string/clock_styles_summary"
-        android:fragment="com.android.settings.mallow.ClockStyles" />
+        <com.android.settings.mallow.SystemSettingSwitchPreference
+            android:key="double_tap_sleep_gesture"
+            android:title="@string/double_tap_to_sleep_title"
+            android:summary="@string/double_tap_to_sleep_summary" />
 
-    <PreferenceScreen
-        android:key="screen_gestures"
-        android:title="@string/screen_gestures_title"
-        android:summary="@string/screen_gestures_summary"
-        android:fragment="com.android.settings.mallow.ScreenGestures" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
