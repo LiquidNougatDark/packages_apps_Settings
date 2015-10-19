@@ -87,6 +87,21 @@
 
     </dashboard-category>
 
+    <!-- PERSONALIZE -->
+    <dashboard-category
+            android:id="@+id/device_personalization"
+            android:title="@string/header_category_personalization" >
+
+        <!-- Mallow tweaks -->
+        <dashboard-tile
+                android:id="@+id/mallow_tweaks"
+                android:title="@string/mallow_tweaks_title"
+                android:fragment="com.android.settings.mallow.MallowTweaks"
+                android:icon="@drawable/ic_settings_mallow"
+                />
+
+    </dashboard-category>
+
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"

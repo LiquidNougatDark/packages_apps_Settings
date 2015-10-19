@@ -2501,6 +2501,21 @@
                        android:resource="@id/wireless_settings" />
         </activity>
 
+        <!-- Mallow tweaks -->
+        <activity android:name="Settings$MallowTweaksActivity"
+            android:label="@string/mallow_tweaks_title"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mallow.MallowTweaks" />
+        </activity>
+
+        <activity
+            android:name=".mallow.MallowTweaks" />
+
         <provider
             android:name=".search.SettingsSearchIndexablesProvider"
             android:authorities="com.android.settings"

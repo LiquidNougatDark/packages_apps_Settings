@@ -109,7 +109,6 @@ public class Settings extends SettingsActivity {
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class OtherSoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DomainsURLsAppListActivity extends SettingsActivity { /* empty */ }
-
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
@@ -118,4 +117,5 @@ public class Settings extends SettingsActivity {
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class MallowTweaksActivity extends SettingsActivity { /* empty */ }
 }

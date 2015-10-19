@@ -49,6 +49,12 @@
     <string name="sm_flags">Optimizations</string>
     <string name="sm_flags_default">None</string>
 
+    <!-- Dashboard header -->
+    <string name="header_category_personalization">Personalize</string>
+
+    <!-- Mallow tweaks -->
+    <string name="mallow_tweaks_title">Mallow tweaks</string>
+
     <!-- SuperSU header name -->
     <string name="supersu_title">SuperSU</string>
 
