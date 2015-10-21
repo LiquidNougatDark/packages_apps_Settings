@@ -19,6 +19,7 @@ package com.android.settings.mallow;
 import com.android.internal.logging.MetricsLogger;
 
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -34,7 +35,10 @@ public class SoundSettings extends SettingsPreferenceFragment
 
     private static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
-
+    private static final String KEY_CAMERA_SOUNDS = "camera_sounds";
+    private static final String PROP_CAMERA_SOUND = "persist.sys.camera-sound";
+    
+    private SwitchPreference mCameraSounds;
     private SwitchPreference mVolumeRockerWake;
     private SwitchPreference mVolBtnMusicCtrl;
 
@@ -43,6 +47,11 @@ public class SoundSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.sound_settings);
+
+        // camera shutter sound
+        mCameraSounds = (SwitchPreference) findPreference(KEY_CAMERA_SOUNDS);
+        mCameraSounds.setChecked(SystemProperties.getBoolean(PROP_CAMERA_SOUND, true));
+        mCameraSounds.setOnPreferenceChangeListener(this);
 
         // volume rocker wake
         mVolumeRockerWake = (SwitchPreference) findPreference(VOLUME_ROCKER_WAKE);
@@ -73,6 +82,7 @@ public class SoundSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
         if (preference == mVolumeRockerWake) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), VOLUME_ROCKER_WAKE,
@@ -82,6 +92,10 @@ public class SoundSettings extends SettingsPreferenceFragment
             Settings.System.putInt(getContentResolver(),
                     Settings.System.VOLBTN_MUSIC_CONTROLS,
                     (Boolean) objValue ? 1 : 0);
+            return true;
+        } else if (KEY_CAMERA_SOUNDS.equals(key)) {
+            final String value = ((Boolean) o) ? "1" : "0";
+            SystemProperties.set(PROP_CAMERA_SOUND, value);
             return true;
         }
         return false;
