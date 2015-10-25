@@ -1218,4 +1218,8 @@
     <string name="disable_animations">Disable animations</string>
     <string name="disable_animations_summary">Disables transition animations such as when launching an app</string>
 
+    <!-- Force expand notifications -->
+    <string name="notification_force_expand_title">Force expanded notification</string>
+    <string name="notification_force_expand_summary">Force expanded notifications on all apps that support it</string>
+
 </resources>
