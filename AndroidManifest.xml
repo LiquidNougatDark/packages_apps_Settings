@@ -2559,6 +2559,7 @@
 
         <!-- Mallow activities-->
         <activity android:name=".mallow.MallowTweaks" />
+        <activity android:name=".mallow.recentshidden.HAFRAppListActivity" />
         <activity android:name=".notificationlight.BatteryLightSettings" />
         <activity android:name=".notificationlight.NotificationLightSettings" />
         <activity android:name=".gestureanywhere.GestureAnywhereBuilderActivity" />
