@@ -668,4 +668,8 @@
     <string name="pa_pie_button_color">Button Color</string>
     <string name="pa_pie_button_color_title">Buttons Color</string>
 
+    <!-- CM Lockscreen shortcuts -->
+    <string name="lockscreen_targets_message">Bottom shortcuts</string>
+    <string name="lockscreen_targets_summary">Change the bottom corner shortcuts</string>
+
 </resources>
