@@ -170,6 +170,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String KEY_COLOR_MODE = "color_mode";
 
+    private static final String SCROLLINGCACHE_PREF = "pref_scrollingcache";
+    private static final String SCROLLINGCACHE_PERSIST_PROP = "persist.sys.scrollingcache";
+    private static final String SCROLLINGCACHE_DEFAULT = "2";
+
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
@@ -215,6 +219,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mBugreportInPower;
     private Preference mRestartSystemUI;
     private ListPreference mKeepScreenOn;
+    private ListPreference mScrollingCachePref;
     private SwitchPreference mBtHciSnoopLog;
     private SwitchPreference mEnableOemUnlock;
     private SwitchPreference mDebugViewAttributes;
@@ -441,6 +446,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreference(KEY_COLOR_MODE);
             mColorModePreference = null;
         }
+        
+        mScrollingCachePref = (ListPreference) findPreference(SCROLLINGCACHE_PREF);
+        mScrollingCachePref.setValue(SystemProperties.get(SCROLLINGCACHE_PERSIST_PROP,
+                 SystemProperties.get(SCROLLINGCACHE_PERSIST_PROP, SCROLLINGCACHE_DEFAULT)));
+        mScrollingCachePref.setOnPreferenceChangeListener(this);
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -1862,6 +1872,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mKeepScreenOn) {
             writeStayAwakeOptions(newValue);
+            return true;
+        } else if (preference == mScrollingCachePref) {
+            if (newValue != null) {
+                SystemProperties.set(SCROLLINGCACHE_PERSIST_PROP, (String) newValue);
+            }
             return true;
         }
         return false;
