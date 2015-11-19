@@ -19,6 +19,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
+        android:key="carrier_label"
+        android:fragment="com.android.settings.mallow.CarrierLabel"
+        android:title="@string/carrier_label_title"
+        android:summary="@string/carrier_label_summary" />
+
+    <PreferenceScreen
         android:key="network_traffic"
         android:fragment="com.android.settings.mallow.NetworkTraffic"
         android:title="@string/network_traffic_title"
