@@ -881,4 +881,8 @@
     <!-- Themes Settings -->
     <string name="themes_settings_title">Themes</string>
 
+    <!-- Swap volume buttons when the screen is rotated -->
+    <string name="swap_volume_buttons_title">Swap on rotation</string>
+    <string name="swap_volume_buttons_summary">Adjust volume buttons action based on current rotation</string>
+
 </resources>
