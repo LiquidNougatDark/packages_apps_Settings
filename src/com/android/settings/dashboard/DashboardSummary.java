@@ -185,23 +185,19 @@ public class DashboardSummary extends InstrumentedFragment {
 
         if (!TextUtils.isEmpty(tile.iconPkg)) {
             try {
-                Drawable outsideDrawable = context.getPackageManager()
+                Drawable drawable = context.getPackageManager()
                         .getResourcesForApplication(tile.iconPkg).getDrawable(tile.iconRes, null);
-                String outsideDrawableName = context.getPackageManager()
-                        .getResourcesForApplication(tile.iconPkg).getResourceEntryName(tile.iconRes);
-                Integer settingsDrawableId = context.getResources()
-                        .getIdentifier(context.getPackageName()+":drawable/"+outsideDrawableName, "drawable", context.getPackageName());
-                if ( settingsDrawableId != 0 ) {
-                    // If this drawable exists in Settings, use it
-                    tileIcon.setImageResource(settingsDrawableId);
-                } else if (!tile.iconPkg.equals(context.getPackageName()) && outsideDrawable != null) {
-                    // If this drawable is coming from outside Settings, and we don't have a same one in Settings,
-                    // tint it to match the color.
-                    TypedValue tintColor = new TypedValue();
-                    context.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
-                            tintColor, true);
-                    outsideDrawable.setTint(tintColor.data);
-                    tileIcon.setImageDrawable(outsideDrawable);
+                if (!tile.iconPkg.equals(context.getPackageName()) && drawable != null) {
+                    // If this drawable is coming from outside Settings, tint it to match the color.
+                    TypedValue tintColorValue = new TypedValue();
+                    context.getResources().getValue(R.color.external_tile_icon_tint_color,
+                            tintColorValue, true);
+                    // If tintColorValue is TYPE_ATTRIBUTE, resolve it
+                    if (tintColorValue.type == TypedValue.TYPE_ATTRIBUTE) {
+                        context.getTheme().resolveAttribute(tintColorValue.data,
+                                tintColorValue, true);
+                    }
+                    drawable.setTint(tintColorValue.data);
                 }
             } catch (NameNotFoundException | Resources.NotFoundException e) {
                 tileIcon.setImageDrawable(null);

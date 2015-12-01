@@ -82,8 +82,6 @@ limitations under the License.
     <color name="storage_volume_color_private5">#ffc0ca33</color> <!-- green -->
     <color name="eject_icon_tint_color">#8a000000</color>
 
-    <color name="external_tile_icon_tint_color">?android:attr/colorAccent</color>
-
     <!-- Text Color for single button panel. See: app storage view -->
     <color name="single_button_panel_button_text_color">@color/text_color_white</color>
 
@@ -91,4 +89,7 @@ limitations under the License.
 
     <!-- Power Usage Hard colors-->
     <color name="power_usage_ab_icon_tint">@android:color/white</color>
+
+    <color name="external_tile_icon_tint_color">?android:attr/colorAccent</color>
+
 </resources>
