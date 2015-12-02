@@ -15,6 +15,16 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Generic strings -->
+    <string name="ok_string">OK</string>
+    <string name="default_string">Default</string>
+    <string name="enabled_string">Enabled</string>
+    <string name="disabled_string">Disabled</string>
+    <string name="general_string">General</string>
+    <string name="reset_string">Reset</string>
+    <string name="empty_string">Empty</string>
+    <string name="attention">Attention</string>
+
     <!-- About phone screen, build date of ROM, Mallow version -->
     <string name="build_date">Mallow build date</string>
     <string name="build_date_default">2015-01-01-0000</string>
