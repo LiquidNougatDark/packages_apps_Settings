@@ -57,6 +57,12 @@
              android:summary="@string/volbtn_down_zen_summary"
              android:defaultValue="false"/>   
 
+	    <com.android.settings.mallow.SystemSettingSwitchPreference
+             android:key="volume_up_leave_zen"
+       	     android:title="@string/volbtn_up_zen_title"
+             android:summary="@string/volbtn_up_zen_summary"
+             android:defaultValue="false"/>    
+
     </PreferenceCategory>
 
 </PreferenceScreen>
