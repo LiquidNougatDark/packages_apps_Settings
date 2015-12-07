@@ -85,6 +85,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_SM_AND = "sm_android";
     private static final String KEY_SM_KERNEL = "sm_kernel";
     private static final String KEY_SM_FLAGS = "sm_flags";
+    private static final String PROPERTY_SM_AND = "ro.sm.android";
+    private static final String PROPERTY_SM_KERNEL = "ro.sm.kernel";
+    private static final String PROPERTY_SM_FLAGS = "ro.sm.flags";
 
     long[] mHits = new long[3];
     int mDevHitCountdown;
@@ -132,12 +135,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
         setValueSummary(KEY_MOD_BUILD_DATE, "ro.build.date");
         setValueSummary(KEY_MALLOW_VERSION, "ro.mallow.version");
-        findPreference(KEY_SM_AND).setEnabled(true);
-        findPreference(KEY_SM_KERNEL).setEnabled(true);
-        findPreference(KEY_SM_FLAGS).setEnabled(true);
-        setValueSummary(KEY_SM_AND, "ro.sm.android");
-        setValueSummary(KEY_SM_KERNEL, "ro.sm.kernel");
-        setValueSummary(KEY_SM_FLAGS, "ro.sm.flags");
+        setValueSummary(KEY_SM_AND, PROPERTY_SM_AND);
+        setValueSummary(KEY_SM_KERNEL,  PROPERTY_SM_KERNEL);
+        setValueSummary(KEY_SM_FLAGS, PROPERTY_SM_FLAGS);
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -150,6 +150,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // Remove selinux information if property is not present
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SELINUX_STATUS,
                 PROPERTY_SELINUX_STATUS);
+
+        // Remove GCC SaberMod information if property is not present
+        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SM_AND,
+                PROPERTY_SM_AND);
+        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SM_KERNEL,
+                PROPERTY_SM_KERNEL);
+        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SM_FLAGS,
+                PROPERTY_SM_FLAGS);
 
         // Remove Equipment id preference if FCC ID is not set by RIL
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_EQUIPMENT_ID,
