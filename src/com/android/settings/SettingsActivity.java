@@ -80,6 +80,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.blacklist.BlacklistSettings;
+import com.android.settings.applications.ExpandedDesktopPreferenceFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
@@ -373,7 +374,8 @@ public class SettingsActivity extends Activity
             AmbientSettings.class.getName(),
             MallowTweaks.class.getName(),
 			com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
-            BlacklistSettings.class.getName()
+            BlacklistSettings.class.getName(),
+            ExpandedDesktopPreferenceFragment.class.getName()
     };
 
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
