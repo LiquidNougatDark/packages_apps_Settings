@@ -1171,4 +1171,8 @@
     <string name="qs_num_columns_showing">%1$s tiles per row showing</string>
     <string name="qs_main_tiles_summary">Two main tiles on the first row</string>
 
+    <!-- Status bar icons -->
+    <string name="status_bar_icon_title">Status bar icons</string>
+    <string name="status_bar_icon_summary">Configure what icons are shown on status bar</string>
+
 </resources>
