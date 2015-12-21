@@ -608,7 +608,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         } else {
             if (!mIsShowingDashboard) {
-                mDisplaySearch = false;
+                mDisplaySearch = true;
                 // UP will be shown only if it is a sub settings
                 if (mIsShortcut) {
                     mDisplayHomeAsUpEnabled = isSubSettings;
