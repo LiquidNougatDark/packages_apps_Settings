@@ -956,12 +956,11 @@
     <string name="animation_control_summary">Customize different styles of animation</string>
 
     <!-- System animation -->
-    <string name="system_animations_title">System animation</string>
-    <string name="system_animations_summary">Choose animations throughout the system</string>
+    <string name="system_animation_title">System animation</string>
+    <string name="system_animation_summary">Choose animations throughout the system</string>
 
     <!-- AOKP custom system animations -->
     <string name="animation_title">Animations</string>  
-    <string name="system_animation_title">System animations</string>
     <string name="activity_open_title">Activity open animation</string>
     <string name="activity_close_title">Activity close animation</string>
     <string name="task_open_title">Task open animation</string>
@@ -993,5 +992,45 @@
     <string name="toast_Translucent_animation">Translucent</string>
     <string name="toast_SlideLeftRight_animation">Slide left to right</string>
     <string name="toast_SlideRightLeft_animation">Slide right to left</string>
+
+    <!-- ListView animation -->
+    <string name="listview_animation_title">ListView animation</string>
+    <string name="listview_off">Default</string>
+    <string name="listview_wave_left">Wave (left)</string>
+    <string name="listview_wave_right">Wave (right)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Scale</string>
+    <string name="listview_stack_top">Stack (top)</string>
+    <string name="listview_stack_bottom">Stack (bottom)</string>
+    <string name="listview_unfold">Unfold</string>
+    <string name="listview_fold">Fold</string>
+    <string name="listview_translate_left">Translate (left)</string>
+    <string name="listview_translate_right">Translate (right)</string>
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">ListView interpolator</string>
+    <string name="listview_accelerate_interpolator">Accelerate</string>
+    <string name="listview_decelerate_interpolator">Decelerate</string>
+    <string name="listview_accelerate_decelerate_interpolator">Accelerate and decelerate</string>
+    <string name="listview_anticipate_interpolator">Anticipate</string>
+    <string name="listview_overshoot_interpolator">Overshoot</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipate and overshoot</string>
+    <string name="listview_bounce_interpolator">Bounce</string>
+
+    <!-- Power menu animation -->
+    <string name="power_menu_animation_title">Power menu animation</string>
+    <string name="power_menu_animation_summary">Change the enter/exit animation of the power menu</string>
+    <string name="power_menu_animation_dialog_title">Select power menu animation</string>
+    <string name="power_menu_animation_aosp">AOSP (default)</string>
+    <string name="power_menu_animation_bottom">Bottom</string>
+    <string name="power_menu_animation_top">Top</string>
+    <string name="power_menu_animation_rotate">Rotation</string>
+    <string name="power_menu_animation_xylon">Fly</string>
+    <string name="power_menu_animation_slide">Slide</string>
+    <string name="power_menu_animation_turn">Turn</string>
+    <string name="power_menu_animation_fly">Glow</string>
+    <string name="power_menu_animation_card">3D</string>
+    <string name="power_menu_animation_translucent_top">Translucent (top)</string>
+    <string name="power_menu_animation_translucent_bottom">Translucent (bottom)</string>
 
 </resources>
