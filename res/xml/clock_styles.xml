@@ -23,6 +23,11 @@
         android:title="@string/status_bar_show_clock_title"
         android:defaultValue="true" />
 
+    <com.android.settings.mallow.SystemSettingSwitchPreference
+        android:key="clock_use_second"
+        android:title="@string/status_bar_show_clock_second_title"
+        android:defaultValue="false" />
+
     <ListPreference
         android:key="clock_style"
         android:entries="@array/clock_style_entries"
