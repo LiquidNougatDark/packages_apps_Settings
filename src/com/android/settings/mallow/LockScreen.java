@@ -16,7 +16,9 @@
  *
  */
 package com.android.settings.mallow;
- 
+
+import com.android.internal.logging.MetricsLogger;
+
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
@@ -27,21 +29,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.android.settings.mallow.SeekBarPreference;
 
-import com.android.internal.logging.MetricsLogger;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class LockScreen extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener {
 
     public static final int IMAGE_PICK = 1;
 
@@ -50,12 +47,14 @@ public class LockScreen extends SettingsPreferenceFragment
 	private static final String LOCKSCREEN_ALPHA = "lockscreen_alpha";
     private static final String LOCKSCREEN_SECURITY_ALPHA = "lockscreen_security_alpha";
 	private static final String PREF_LS_BOUNCER = "lockscreen_bouncer";
+	private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_cofig";
 
     private Preference mSetWallpaper;
     private Preference mClearWallpaper;
 	private SeekBarPreference mLsAlpha;
     private SeekBarPreference mLsSecurityAlpha;
-	ListPreference mLsBouncer;
+	private ListPreference mLsBouncer;
+	private SeekBarPreference mMaxKeyguardNotifConfig;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +84,12 @@ public class LockScreen extends SettingsPreferenceFragment
                 Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f);
         mLsSecurityAlpha.setValue((int)(100 * alpha2));
         mLsSecurityAlpha.setOnPreferenceChangeListener(this);
+        
+        mMaxKeyguardNotifConfig = (SeekBarPreference) findPreference(LOCKSCREEN_MAX_NOTIF_CONFIG);
+        int kgconf = Settings.System.getInt(resolver,
+                Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, 5);
+        mMaxKeyguardNotifConfig.setValue(kgconf);
+        mMaxKeyguardNotifConfig.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -107,6 +112,7 @@ public class LockScreen extends SettingsPreferenceFragment
 	@Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
+
         if (preference == mLsBouncer) {
             int lockbouncer = Integer.valueOf((String) newValue);
             Settings.Secure.putInt(resolver, Settings.Secure.LOCKSCREEN_BOUNCER, lockbouncer);
@@ -121,6 +127,11 @@ public class LockScreen extends SettingsPreferenceFragment
             int alpha2 = (Integer) newValue;
             Settings.System.putFloat(resolver,
                     Settings.System.LOCKSCREEN_SECURITY_ALPHA, alpha2 / 100.0f);
+            return true;
+        } else if (preference == mMaxKeyguardNotifConfig) {
+            int kgconf = (Integer) newValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, kgconf);
             return true;
         }
         return false;
