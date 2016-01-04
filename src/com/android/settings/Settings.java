@@ -124,4 +124,5 @@ public class Settings extends SettingsActivity {
     public static class HeadsUpActivity extends SettingsActivity { /* empty */ }
     public static class PieControlActivity extends SettingsActivity { /* empty */ }
     public static class NavigationBarActivity extends SettingsActivity { /* empty */ }
+    public static class FloatingWindowsActivity extends SettingsActivity { /* empty */ }
 }

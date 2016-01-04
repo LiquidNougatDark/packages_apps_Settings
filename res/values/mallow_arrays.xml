@@ -641,6 +641,7 @@
     <string-array name="shortcut_action_entries">
         <item>@string/shortcut_action_back</item>
         <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_floating_windows</item>
         <item>@string/shortcut_action_home</item>
         <item>@string/shortcut_action_kill</item>
         <item>@string/shortcut_action_lastapp</item>
@@ -661,6 +662,7 @@
     <string-array name="shortcut_action_values" translatable="false">
         <item>**back**</item>
         <item>**app**</item>
+        <item>**floating_windows**</item>
         <item>**home**</item>
         <item>**kill**</item>
         <item>**lastapp**</item>

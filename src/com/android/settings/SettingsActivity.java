@@ -81,7 +81,6 @@ import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.blacklist.BlacklistSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.mallow.DisplayRotation;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
@@ -134,6 +133,7 @@ import com.android.settings.mallow.PieControl;
 import com.android.settings.mallow.MallowTweaks;
 import com.android.settings.mallow.NavigationBar;
 import com.android.settings.mallow.DisplayRotation;
+import com.android.settings.mallow.FloatingWindows;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -370,6 +370,7 @@ public class SettingsActivity extends Activity
             MallowTweaks.class.getName(),
             NavigationBar.class.getName(),
             DisplayRotation.class.getName(),
+            FloatingWindows.class.getName(),
             MallowTweaks.class.getName(),
 			com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
             BlacklistSettings.class.getName()

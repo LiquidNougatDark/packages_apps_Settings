@@ -86,6 +86,11 @@
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <PreferenceScreen
+    	        android:key="floating_windows"
+                android:title="@string/floating_windows_title"
+                android:fragment="com.android.settings.mallow.FloatingWindows" />
+
         <ListPreference
     	        android:key="lcd_density"
                 android:title="@string/lcd_density"
