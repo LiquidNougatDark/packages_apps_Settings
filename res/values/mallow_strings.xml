@@ -133,7 +133,7 @@
     <!-- Battery styles -->
     <string name="battery_styles_title">Battery styles</string>
     <string name="battery_styles_summary">Change the battery icon and text style</string>
-    
+
     <!-- Status bar battery -->
     <string name="status_bar_battery_style_title">Battery status style</string>
     <string name="status_bar_battery_style_icon_portrait">Icon portrait</string>
@@ -746,7 +746,7 @@
     <string name="navbar_dimensions_reset_message">Reset all dimensions entries to default?</string>
     <string name="navbar_button_style_reset_message">Reset all style entries to default?</string>
     <string name="shortcut_action_required_warning_message">It is not possible to delete required buttons</string>
-    
+
     <!-- Navigation bar button style -->
     <string name="nav_bar_button_style">Button style</string>
     <string name="nav_bar_button_style_summary">Change navigation bar button style</string>
@@ -756,7 +756,7 @@
     <string name="nav_button_color_mode_dialog_title">Colorize</string>
     <string name="nav_button_color_mode_summary">Change the navigation bar button color mode</string>
     <string name="navigation_bar_glow_tint_title">Button glow color</string>
-    
+
     <string name="icon_color_mode_all_icons">All icons</string>
     <string name="icon_color_mode_system_icons">System icons</string>
     <string name="icon_color_mode_system_custom_icons">System and custom icons</string>
@@ -1179,7 +1179,7 @@
     <!-- Slim recents -->
     <string name="slim_recents_title">Slim recents</string>
     <string name="slim_recents_summary">Side bar style like recent apps</string>
-                                        
+                 
     <!-- Recent panel -->
     <string name="use_slim_recents_title">Slim recents</string>
     <string name="show_running_tasks_title">Only show running apps</string>
@@ -1256,5 +1256,9 @@
     <!-- Advanced location -->
     <string name="qs_advanced_location_title">Advanced location</string>
     <string name="qs_advanced_location_summary">Enable advanced settings for location in quick settings</string>
+
+    <!-- Disable OS on LS -->
+    <string name="block_on_secure_keyguard_title">Disable quick settings</string>
+    <string name="block_on_secure_keyguard_summary">Disables quick settings on secure lockscreen</string>
 
 </resources>
