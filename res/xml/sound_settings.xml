@@ -40,10 +40,25 @@
             android:persistent="false"
             android:defaultValue="false" />
 
+        <SwitchPreference
+            android:key="safe_headset_volume"
+            android:title="@string/safe_headset_volume_title"
+            android:summary="@string/safe_headset_volume_summary"
+            android:persistent="false"
+            android:defaultValue="true" />
+
         <com.android.settings.mallow.SystemSettingSwitchPreference
             android:key="volume_keys_control_ring_stream"
             android:title="@string/volume_keys_control_ring_stream_title"
             android:summary="@string/volume_keys_control_ring_stream_summary" />
+
+        <ListPreference
+            android:key="less_notification_sounds"
+            android:title="@string/less_notification_sounds_title"
+            android:summary="@string/less_notification_sounds_summary"
+            android:entries="@array/less_notification_sounds_entries"
+            android:entryValues="@array/less_notification_sounds_values"
+            android:persistent="false" />
 
         <com.android.settings.mallow.SystemSettingSwitchPreference
             android:key="swap_volume_buttons"
