@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2016 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +85,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
-    private static final String KEY_ZEN_ACCESS = "manage_zen_access";
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
@@ -95,7 +95,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         KEY_ALARM_VOLUME,
         KEY_RING_VOLUME,
         KEY_NOTIFICATION_VOLUME,
-        KEY_ZEN_ACCESS,
         KEY_ZEN_MODE,
     };
 
@@ -133,7 +132,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private TwoStatePreference mNotificationPulse;
     private DropDownPreference mLockscreen;
     private Preference mNotificationAccess;
-    private Preference mZenAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
     private ComponentName mSuppressor;
@@ -198,8 +196,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
-        mZenAccess = findPreference(KEY_ZEN_ACCESS);
-        refreshZenAccess();
         updateRingerMode();
         updateEffectsSuppressor();
     }
@@ -208,7 +204,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     public void onResume() {
         super.onResume();
         refreshNotificationListeners();
-        refreshZenAccess();
         lookupRingtoneNames();
         initVolumeLinkNotification();
         mSettingsObserver.register(true);
@@ -666,12 +661,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                         n, n)));
             }
         }
-    }
-
-    // === Zen access ===
-
-    private void refreshZenAccess() {
-        // noop for now
     }
 
     // === Callbacks ===
