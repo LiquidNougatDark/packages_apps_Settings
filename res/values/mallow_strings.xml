@@ -1166,4 +1166,9 @@
     <!-- QS header transparency -->
     <string name="qs_transparent_header">QS header transparency</string>
 
+    <!-- QS tiles columns -->
+    <string name="qs_num_columns_title">Number of tiles per row</string>
+    <string name="qs_num_columns_showing">%1$s tiles per row showing</string>
+    <string name="qs_main_tiles_summary">Two main tiles on the first row</string>
+
 </resources>
