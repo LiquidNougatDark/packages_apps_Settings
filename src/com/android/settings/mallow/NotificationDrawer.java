@@ -18,18 +18,26 @@ package com.android.settings.mallow;
 
 import com.android.internal.logging.MetricsLogger;
 
-import android.os.Bundle;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
-import java.util.Locale;
 import android.text.TextUtils;
 import android.view.View;
+
+import com.android.settings.mallow.SeekBarPreferenceCHOS;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.List;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -39,8 +47,12 @@ public class NotificationDrawer extends SettingsPreferenceFragment
     implements OnPreferenceChangeListener {
 
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
+    private static final String PREF_QS_TRANSPARENT_SHADE = "qs_transparent_shade";
+	private static final String PREF_QS_TRANSPARENT_HEADER = "qs_transparent_header";
 
     private ListPreference mQuickPulldown;
+    private SeekBarPreferenceCHOS mQSShadeAlpha;
+    private SeekBarPreferenceCHOS mQSHeaderAlpha;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,27 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
             updateQuickPulldownSummary(statusQuickPulldown);
         }
+
+        // QS shade alpha
+        mQSShadeAlpha =
+        (SeekBarPreferenceCham) prefSet.findPreference(PREF_QS_TRANSPARENT_SHADE);
+        int qSShadeAlpha = Settings.System.getInt(getContentResolver(),
+                    Settings.System.QS_TRANSPARENT_SHADE, 255);
+        mQSShadeAlpha.setValue(qSShadeAlpha / 1);
+        mQSShadeAlpha.setOnPreferenceChangeListener(this);
+
+		// QS header alpha
+        mQSHeaderAlpha =
+        	(SeekBarPreferenceCham) prefSet.findPreference(PREF_QS_TRANSPARENT_HEADER);
+        int qSHeaderAlpha = Settings.System.getInt(getContentResolver(),
+        	Settings.System.QS_TRANSPARENT_HEADER, 255);
+        mQSHeaderAlpha.setValue(qSHeaderAlpha / 1);
+        mQSHeaderAlpha.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override
@@ -72,13 +105,18 @@ public class NotificationDrawer extends SettingsPreferenceFragment
                     statusQuickPulldown);
             updateQuickPulldownSummary(statusQuickPulldown);
             return true;
+        } else if (preference == mQSShadeAlpha) {
+            int alpha = (Integer) objValue;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.QS_TRANSPARENT_SHADE, alpha * 1);
+            return true;
+		} else if (preference == mQSHeaderAlpha) {
+            int alpha = (Integer) objValue;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.QS_TRANSPARENT_HEADER, alpha * 1);
+            return true;			
         }
         return false;
-    }
-
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     private void updateQuickPulldownSummary(int value) {

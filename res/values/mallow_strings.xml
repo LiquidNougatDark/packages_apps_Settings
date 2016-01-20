@@ -1160,4 +1160,10 @@
     <string name="quick_settings_title">Tile configuration</string>
     <string name="quick_settings_summary">Configure quick settings tiles</string>
 
+    <!-- QS shade transparency -->
+    <string name="qs_transparent_shade">QS shade transparency</string>
+
+    <!-- QS header transparency -->
+    <string name="qs_transparent_header">QS header transparency</string>
+
 </resources>

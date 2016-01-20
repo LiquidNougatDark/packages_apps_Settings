@@ -46,15 +46,28 @@
         android:defaultValue="false"/>
 
     <com.android.settings.mallow.SecureSettingSwitchPreference
-        android:key="qs_use_four_columns"
-        android:title="@string/qs_four_columns_title"
-        android:defaultValue="false" />
-
-    <com.android.settings.mallow.SecureSettingSwitchPreference
         android:key="sysui_qs_main_tiles"
         android:title="@string/qs_main_tiles_title"
         android:summaryOn="@string/qs_main_tiles_summary_on"
         android:summaryOff="@string/qs_main_tiles_summary_off"
         android:defaultValue="true" />
+
+	<com.android.settings.mallow.SeekBarPreferenceCHOS
+        android:key="qs_transparent_shade"
+        android:title="@string/qs_transparent_shade"
+        android:max="255"
+        settings:min="0"
+        settings:unitsLeft=""
+        settings:unitsRight=""
+        android:persistent="false" />
+
+	<com.android.settings.mallow.SeekBarPreferenceCHOS
+        android:key="qs_transparent_header"
+        android:title="@string/qs_transparent_header"
+        android:max="255"
+        settings:min="0"
+        settings:unitsLeft=""
+        settings:unitsRight=""
+        android:persistent="false" />  
 
 </PreferenceScreen>
