@@ -37,6 +37,8 @@ import android.provider.Settings.SettingNotFoundException;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.android.settings.widget.SeekBarPreferenceCHOS;
+
 public class SoundSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
 
@@ -50,12 +52,14 @@ public class SoundSettings extends SettingsPreferenceFragment
     private static final String PROP_CAMERA_SOUND = "persist.sys.camera-sound";
     private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
     private static final String PREF_LESS_NOTIFICATION_SOUNDS = "less_notification_sounds";
+    private static final String PREF_TRANSPARENT_VOLUME_DIALOG = "transparent_volume_dialog";
 
     private SwitchPreference mCameraSounds;
     private SwitchPreference mVolumeRockerWake;
     private SwitchPreference mVolBtnMusicCtrl;
     private SwitchPreference mSafeHeadsetVolume;
     private ListPreference mAnnoyingNotifications;
+    private SeekBarPreferenceCHOS mVolumeDialogAlpha;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -136,6 +140,11 @@ public class SoundSettings extends SettingsPreferenceFragment
             Settings.System.putInt(getContentResolver(),
                 Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, val);
             return true;
+        } else if (preference == mVolumeDialogAlpha) {
+            int alpha = (Integer) newValue;
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.TRANSPARENT_VOLUME_DIALOG, alpha * 1);
+            return true;  
         }
         return false;
     }
