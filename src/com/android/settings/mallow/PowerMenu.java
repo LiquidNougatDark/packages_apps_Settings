@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mallow;
+package com.android.settings.screwd;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -37,6 +37,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.cm.PowerMenuConstants;
 
+import com.android.settings.widget.SeekBarPreferenceCham;
+
 import static com.android.internal.util.cm.PowerMenuConstants.*;
 import com.android.settings.widget.NumberPickerPreference;
 
@@ -46,12 +48,12 @@ import java.util.List;
 
 public class PowerMenu extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
-
-    final static String TAG = "PowerMenu";
+    final static String TAG = "PowerMenuActions";
 
     private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";
-    private static final String PREF_SCREENSHOT_DELAY = "screenshot_delay";
-
+    private static final String SCREENSHOT_DELAY = "screenshot_delay";
+	private static final String PREF_TRANSPARENT_POWER_MENU = "transparent_power_menu";
+	
     private SwitchPreference mRebootPref;
     private SwitchPreference mScreenshotPref;
     private SwitchPreference mScreenrecordPref;
@@ -62,6 +64,7 @@ public class PowerMenu extends SettingsPreferenceFragment
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
     private SlimSeekBarPreference mOnTheGoAlphaPref;
+	private SeekBarPreferenceCham mPowerMenuAlpha;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -80,7 +83,7 @@ public class PowerMenu extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.power_menu_settings);
+        addPreferencesFromResource(R.xml.power_menu);
         mContext = getActivity().getApplicationContext();
 
         mPrefSet = getPreferenceScreen();
@@ -92,7 +95,7 @@ public class PowerMenu extends SettingsPreferenceFragment
         mAllActions = PowerMenuConstants.getAllActions();
 
         for (String action : mAllActions) {
-        // Remove preferences not present in the overlay
+            // Remove preferences not present in the overlay
             if (!isActionAllowed(action)) {
                 getPreferenceScreen().removePreference(findPreference(action));
                 continue;
@@ -125,7 +128,7 @@ public class PowerMenu extends SettingsPreferenceFragment
         mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
 
         mScreenshotDelay = (NumberPickerPreference) mPrefSet.findPreference(
-                PREF_SCREENSHOT_DELAY);
+                SCREENSHOT_DELAY);
         mScreenshotDelay.setOnPreferenceChangeListener(this);
         mScreenshotDelay.setMinValue(MIN_DELAY_VALUE);
         mScreenshotDelay.setMaxValue(MAX_DELAY_VALUE);
@@ -134,11 +137,19 @@ public class PowerMenu extends SettingsPreferenceFragment
         mScreenshotDelay.setCurrentValue(ssDelay);
 
         getUserConfig();
+		
+		// Power menu alpha
+    	mPowerMenuAlpha =
+        	(SeekBarPreferenceCham) mPrefSet.findPreference(PREF_TRANSPARENT_POWER_MENU);
+        int powerMenuAlpha = Settings.System.getInt(mCr,
+        	Settings.System.TRANSPARENT_POWER_MENU, 100);
+        mPowerMenuAlpha.setValue(powerMenuAlpha / 1);
+        mPowerMenuAlpha.setOnPreferenceChangeListener(this);
     }
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
+        return MetricsLogger.DEVELOPMENT; //TODO: add our own logging metrics?
     }
 
     @Override
@@ -256,6 +267,11 @@ public class PowerMenu extends SettingsPreferenceFragment
             Settings.System.putInt(mCr, Settings.System.SCREENSHOT_DELAY,
                     value);
             return true;
+		} else if (preference == mPowerMenuAlpha) {
+                int alpha = (Integer) newValue;
+				Settings.System.putInt(mCr,
+                        Settings.System.TRANSPARENT_POWER_MENU, alpha * 1);
+                return true;	
         }
         return false;
     }
