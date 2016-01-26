@@ -33,4 +33,8 @@
     <color name="floating_action_button_touch_tint">#80ffffff</color>
     <color name="white">@android:color/white</color>
 
+    <!-- BlackList colors -->
+    <color name="blacklist_enabled">#DD2C00</color>
+    <color name="blacklist_disabled">#D7D7D7</color>
+
 </resources>
