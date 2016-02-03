@@ -43,6 +43,12 @@
         android:fragment="com.android.settings.mallow.ClockStyles" />
 
     <PreferenceScreen
+        android:key="heads_up"
+        android:title="@string/heads_up_title"
+        android:summary="@string/heads_up_summary"
+        android:fragment="com.android.settings.mallow.HeadsUp" />
+
+    <PreferenceScreen
         android:key="keyboard_input"
         android:title="@string/keyboard_input_title"
         android:summary="@string/keyboard_input_summary"

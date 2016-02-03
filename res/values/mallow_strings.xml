@@ -1317,4 +1317,11 @@
     <string name="app_notification_no_ongoing_on_keyguard_title">Disable ongoing on lockscreen</string>
     <string name="app_notification_no_ongoing_on_keyguard_summary">Never show ongoing notifications from this app on the lockscreen</string>
 
+    <!-- Heads up -->
+    <string name="heads_up_title">Heads up</string>
+    <string name="heads_up_summary">Enable or disable popup notifications</string>
+    <string name="heads_up_notifications">Heads up</string>
+    <string name="heads_up_snooze">Snooze</string>
+    <string name="heads_up_timeout">Timeout</string>
+
 </resources>
