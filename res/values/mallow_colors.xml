@@ -26,7 +26,7 @@
     <color name="ga_gesture_color">@android:color/holo_blue_light</color>
 
     <!-- DSLV colors -->
-    <color name="dslv_icon_dark">#80000000</color>
+    <color name="dslv_icon_dark">#ffffffff</color>
     <color name="dslv_float_background_color">#ff1b1f23</color>
 
     <!-- FAB colors -->
