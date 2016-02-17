@@ -61,7 +61,6 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
         mImageView = (ImageView) view.findViewById(R.id.icon);
 
         mTitleTextView = (TextView) view.findViewById(R.id.title);
-
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.DASHBOARD_TILEVIEW_DOUBLE_LINES, 0) == 1) {
             mTitleTextView.setSingleLine(false);
@@ -70,7 +69,14 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
         }
 
         mStatusTextView = (TextView) view.findViewById(R.id.status);
+
         mDivider = view.findViewById(R.id.tile_divider);
+		if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.DASHBOARD_TILEVIEW_DIVIDERS, 0) == 1) {
+            mDivider.setVisibility(View.GONE);
+        } else {
+            mDivider.setVisibility(View.VISIBLE);
+        }
         mSwitch = (Switch) view.findViewById(R.id.dashboard_switch);
 
         setOnClickListener(this);
