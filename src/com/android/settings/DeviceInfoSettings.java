@@ -88,6 +88,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String PROPERTY_SM_AND = "ro.sm.android";
     private static final String PROPERTY_SM_KERNEL = "ro.sm.kernel";
     private static final String PROPERTY_SM_FLAGS = "ro.sm.flags";
+    private static final String KEY_DTC_VERSION = "dtc_version";
+    private static final String PROPERTY_DTC_VERSION = "ro.dtc.version";
 
     long[] mHits = new long[3];
     int mDevHitCountdown;
@@ -138,6 +140,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         setValueSummary(KEY_SM_AND, PROPERTY_SM_AND);
         setValueSummary(KEY_SM_KERNEL,  PROPERTY_SM_KERNEL);
         setValueSummary(KEY_SM_FLAGS, PROPERTY_SM_FLAGS);
+        setValueSummary(KEY_DTC_VERSION, "ro.dtc.version");
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -158,6 +161,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 PROPERTY_SM_KERNEL);
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SM_FLAGS,
                 PROPERTY_SM_FLAGS);
+        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_DTC_VERSION,
+                PROPERTY_DTC_VERSION);
 
         // Remove Equipment id preference if FCC ID is not set by RIL
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_EQUIPMENT_ID,
