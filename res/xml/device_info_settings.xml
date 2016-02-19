@@ -117,4 +117,10 @@
                 android:title="@string/uber_flags"
                 android:summary="@string/uber_flags_default" />
 
+        <Preference android:key="dtc_version"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/dtc_version"
+                android:summary="@string/dtc_version_default"
+                android:selectable="false" />
+
 </PreferenceScreen>
