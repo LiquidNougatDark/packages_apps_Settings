@@ -34,6 +34,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.android.settings.mallow.SeekBarPreferenceCHOS;
+import com.android.internal.util.mallow.MallowUtils;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -48,11 +49,13 @@ public class NotificationDrawer extends SettingsPreferenceFragment
 
     private static final String PREF_QUICK_PULLDOWN = "quick_pulldown";
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
+    private static final String FLASHLIGHT_NOTIFICATION = "flashlight_notification";
     private static final String PREF_QS_TRANSPARENT_SHADE = "qs_transparent_shade";
 	private static final String PREF_QS_TRANSPARENT_HEADER = "qs_transparent_header";
 
     private ListPreference mQuickPulldown;
     private ListPreference mSmartPulldown;
+    private SwitchPreference mFlashlightNotification;
     private SeekBarPreferenceCHOS mQSShadeAlpha;
     private SeekBarPreferenceCHOS mQSHeaderAlpha;
     private ListPreference mNumColumns;
@@ -109,6 +112,16 @@ public class NotificationDrawer extends SettingsPreferenceFragment
         mNumColumns.setValue(String.valueOf(numColumns));
         updateNumColumnsSummary(numColumns);
         mNumColumns.setOnPreferenceChangeListener(this);
+        
+        // Flashlight notification
+        mFlashlightNotification = (SwitchPreference) findPreference(FLASHLIGHT_NOTIFICATION);
+        mFlashlightNotification.setOnPreferenceChangeListener(this);
+        if (!screwdUtils.deviceSupportsFlashLight(getActivity())) {
+            prefSet.removePreference(mFlashlightNotification);
+        } else {
+        mFlashlightNotification.setChecked((Settings.System.getInt(resolver,
+            Settings.System.FLASHLIGHT_NOTIFICATION, 0) == 1));
+        }
     }
 
     @Override
@@ -127,10 +140,15 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             return true;
         } else if (preference == mSmartPulldown) {
             int smartPulldown = Integer.valueOf((String) newValue);
-            Settings.System.putInt(getContentResolver(),
-            Settings.System.QS_SMART_PULLDOWN, smartPulldown);
+                    Settings.System.putInt(getContentResolver(),
+                    Settings.System.QS_SMART_PULLDOWN, smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
-            return true;	
+            return true;
+        } else if  (preference == mFlashlightNotification) {
+            boolean checked = ((SwitchPreference)preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.FLASHLIGHT_NOTIFICATION, checked ? 1:0);
+            return true;		
         } else if (preference == mQSShadeAlpha) {
             int alpha = (Integer) objValue;
             Settings.System.putInt(getContentResolver(),

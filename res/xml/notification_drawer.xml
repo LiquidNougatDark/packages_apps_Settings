@@ -83,6 +83,12 @@
         android:summary="@string/notification_force_expand_summary"
         android:defaultValue="false" />
 
+	<com.android.settings.mallow.SystemSettingSwitchPreference
+        android:key="flashlight_notification"
+        android:title="@string/flashlight_notification_title"
+        android:summary="@string/flashlight_notification_summary"
+        android:defaultValue="false" />
+
 	<com.android.settings.mallow.SeekBarPreferenceCHOS
         android:key="qs_transparent_shade"
         android:title="@string/qs_transparent_shade"
