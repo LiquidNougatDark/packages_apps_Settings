@@ -57,7 +57,14 @@
             android:title="@string/keyguard_torch_title"
             android:summary="@string/keyguard_torch_summary"
             android:defaultValue="false" />
-
+	    
+	    <ListPreference
+            android:key="lockscreen_bouncer"
+            android:title="@string/ls_bouncer_title"
+            android:entries="@array/ls_bouncer_entries"
+            android:entryValues="@array/ls_bouncer_values"
+            android:persistent="false" />
+	    
     </PreferenceCategory>
 
     <PreferenceCategory

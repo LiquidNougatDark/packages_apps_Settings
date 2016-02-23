@@ -16,37 +16,57 @@
  *
  */
 package com.android.settings.mallow;
-
-import com.android.internal.logging.MetricsLogger;
-
+ 
 import android.app.Activity;
 import android.app.WallpaperManager;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.widget.Toast;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class LockScreen extends SettingsPreferenceFragment {
+import com.android.internal.logging.MetricsLogger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LockScreen extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
+
     public static final int IMAGE_PICK = 1;
 
     private static final String KEY_WALLPAPER_SET = "lockscreen_wallpaper_set";
     private static final String KEY_WALLPAPER_CLEAR = "lockscreen_wallpaper_clear";
+	private static final String PREF_LS_BOUNCER = "lockscreen_bouncer";
 
     private Preference mSetWallpaper;
     private Preference mClearWallpaper;
-
-    @Override
+	ListPreference mLsBouncer;
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lock_screen);
 
+		ContentResolver resolver = getActivity().getContentResolver();
+
         mSetWallpaper = (Preference) findPreference(KEY_WALLPAPER_SET);
         mClearWallpaper = (Preference) findPreference(KEY_WALLPAPER_CLEAR);
+
+		mLsBouncer = (ListPreference) findPreference(PREF_LS_BOUNCER);
+        mLsBouncer.setOnPreferenceChangeListener(this);
+        int lockbouncer = Settings.Secure.getInt(resolver,
+                Settings.Secure.LOCKSCREEN_BOUNCER, 0);
+        mLsBouncer.setValue(String.valueOf(lockbouncer));
+        updateBouncerSummary(lockbouncer);
     }
 
     @Override
@@ -61,14 +81,52 @@ public class LockScreen extends SettingsPreferenceFragment {
             return true;
         } else if (preference == mClearWallpaper) {
             clearKeyguardWallpaper();
-            Toast.makeText(getView().getContext(), getString(R.string.reset_lockscreen_wallpaper),
-            Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
-
-    @Override
+	
+	@Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mLsBouncer) {
+            int lockbouncer = Integer.valueOf((String) newValue);
+            Settings.Secure.putInt(resolver, Settings.Secure.LOCKSCREEN_BOUNCER, lockbouncer);
+            updateBouncerSummary(lockbouncer);
+            return true;
+        }
+        return false;
+    }
+	
+	private void updateBouncerSummary(int value) {
+        Resources res = getResources();
+ 
+        if (value == 0) {
+            // stock bouncer
+            mLsBouncer.setSummary(res.getString(R.string.ls_bouncer_on_summary));
+        } else if (value == 1) {
+            // bypass bouncer
+            mLsBouncer.setSummary(res.getString(R.string.ls_bouncer_off_summary));
+        } else {
+            String type = null;
+            switch (value) {
+                case 2:
+                    type = res.getString(R.string.ls_bouncer_dismissable);
+                    break;
+                case 3:
+                    type = res.getString(R.string.ls_bouncer_persistent);
+                    break;
+                case 4:
+                    type = res.getString(R.string.ls_bouncer_all);
+                    break;
+            }
+            // Remove title capitalized formatting
+            type = type.toLowerCase();
+            mLsBouncer.setSummary(res.getString(R.string.ls_bouncer_summary, type));
+        }
+    }
+	
+	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_PICK && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getData() != null) {
