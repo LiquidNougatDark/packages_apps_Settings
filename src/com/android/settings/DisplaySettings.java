@@ -116,6 +116,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String ROTATION_ANGLE_270 = "270";
     
     private static final String DASHBOARD_COLUMNS = "dashboard_columns";
+    private static final String DASHBOARD_SWITCHES = "dashboard_switches";
 
     private PreferenceScreen mDisplayRotationPreference;
 
@@ -137,6 +138,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDozePreference;
     private PreferenceScreen mAdvancedDozeOptions;
     private ListPreference mDashboardColumns;
+	private ListPreference mDashboardSwitches;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -184,6 +186,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 getContentResolver(), Settings.System.DASHBOARD_COLUMNS, DashboardContainerView.mDashboardValue)));
         mDashboardColumns.setSummary(mDashboardColumns.getEntry());
         mDashboardColumns.setOnPreferenceChangeListener(this);
+
+        mDashboardSwitches = (ListPreference) findPreference(DASHBOARD_SWITCHES);
+        mDashboardSwitches.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.DASHBOARD_SWITCHES, 0)));
+        mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
+        mDashboardSwitches.setOnPreferenceChangeListener(this);
 
 		mLcdDensityPreference = (ListPreference) findPreference(KEY_LCD_DENSITY);
         if (mLcdDensityPreference != null) {
@@ -635,6 +643,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Integer.valueOf((String) objValue));
             mDashboardColumns.setValue(String.valueOf(objValue));
             mDashboardColumns.setSummary(mDashboardColumns.getEntry());
+            return true;
+        }
+        if (preference == mDashboardSwitches) {
+            Settings.System.putInt(getContentResolver(), Settings.System.DASHBOARD_SWITCHES,
+                    Integer.valueOf((String) objValue));
+            mDashboardSwitches.setValue(String.valueOf(objValue));
+            mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
             return true;
         }
         if (preference == mCameraDoubleTapPowerGesturePreference) {
