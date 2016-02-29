@@ -1492,6 +1492,8 @@
     <string name="slim_action_floats_summary">Launch Slim &amp; Pie Actions in Floating Window Mode</string>
     <string name="gesture_anywhere_floating">Gesture Anywhere</string>
     <string name="gesture_anywhere_floating_summary">Launch Gesture Anywhere shortcuts in float mode</string>
+    <string name="qs_float_mode">Quick Settings</string>
+    <string name="qs_float_mode_summary">Launch Quick Settings and Expanded Header actions in float mode</string>
 
     <!-- NFC settings -->
     <string name="nfc_title_category">NFC</string>
