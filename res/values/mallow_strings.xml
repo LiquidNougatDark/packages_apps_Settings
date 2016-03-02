@@ -878,4 +878,7 @@
     <string name="onthego_alpha_title">On-The-Go Alpha</string>
     <string name="onthego_alpha_summary">Alpha value of the On-The-Go overlay. Needs re-toggling.</string>
 
+    <!-- Themes Settings -->
+    <string name="themes_settings_title">Themes</string>
+
 </resources>
