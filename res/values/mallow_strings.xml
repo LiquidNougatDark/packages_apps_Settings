@@ -230,6 +230,7 @@
     <string name="power_menu_sound_title">Sound panel</string>
     <string name="power_menu_bug_report_disabled">Bug reporting is disabled in development settings</string>
     <string name="powermenu_screenshot_delay_title">Set screenshot delay</string>
+    <string name="powermenu_torch">Torch</string>
 
     <!-- Double tap navbar to sleep -->
     <string name="double_tap_sleep_nav_bar_title">Double-tap to sleep</string>

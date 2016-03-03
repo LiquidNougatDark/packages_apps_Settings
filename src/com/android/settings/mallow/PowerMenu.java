@@ -37,8 +37,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.cm.PowerMenuConstants;
 
-import com.android.settings.widget.SeekBarPreferenceCham;
-
+import com.android.settings.widget.SeekBarPreferenceCHOS;
+import com.android.internal.util.mallow.MallowUtils;
 import static com.android.internal.util.cm.PowerMenuConstants.*;
 import com.android.settings.widget.NumberPickerPreference;
 
@@ -53,7 +53,8 @@ public class PowerMenu extends SettingsPreferenceFragment
     private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";
     private static final String SCREENSHOT_DELAY = "screenshot_delay";
 	private static final String PREF_TRANSPARENT_POWER_MENU = "transparent_power_menu";
-	
+	private static final String POWERMENU_TORCH = "powermenu_torch";
+
     private SwitchPreference mRebootPref;
     private SwitchPreference mScreenshotPref;
     private SwitchPreference mScreenrecordPref;
@@ -63,8 +64,9 @@ public class PowerMenu extends SettingsPreferenceFragment
     private SwitchPreference mLockdownPref;
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
+    private SwitchPreference mTorchPref;
     private SlimSeekBarPreference mOnTheGoAlphaPref;
-	private SeekBarPreferenceCham mPowerMenuAlpha;
+	private SeekBarPreferenceCHOS mPowerMenuAlpha;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -117,9 +119,9 @@ public class PowerMenu extends SettingsPreferenceFragment
                 mLockdownPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
             } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
                 mBugReportPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
-            } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
-                mSilentPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
-            }
+            } else if (action.equals(GLOBAL_ACTION_KEY_TORCH)) {
+                mTorchPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_TORCH);
+            } else if (
         }
 
         mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
@@ -168,9 +170,12 @@ public class PowerMenu extends SettingsPreferenceFragment
             mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
         }
 
-        if (mAirplanePref != null) {
-            mAirplanePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_AIRPLANE));
-        }
+		if (mTorchPref != null) {
+			if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
+            	mTorchPref.setEnabled(false);
+        	} else {
+        		mTorchPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_TORCH));
+			}
 
         if (mUsersPref != null) {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
@@ -224,6 +229,10 @@ public class PowerMenu extends SettingsPreferenceFragment
         } else if (preference == mScreenrecordPref) {
             value = mScreenrecordPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENRECORD);
+
+        } else if (preference == mTorchPref) {
+			value = mTorchPref.isChecked();
+			updateUserConfig(value, GLOBAL_ACTION_KEY_TORCH);
 
         } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();
