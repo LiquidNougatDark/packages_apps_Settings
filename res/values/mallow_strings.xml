@@ -1156,4 +1156,8 @@
     <string name="advanced_reboot_oneclick">One click reboot</string>
     <string name="advanced_reboot_oneclick_summary">Instantly trigger reboot action</string>
 
+    <!-- Quick settings -->
+    <string name="quick_settings_title">Tile configuration</string>
+    <string name="quick_settings_summary">Configure quick settings tiles</string>
+
 </resources>
