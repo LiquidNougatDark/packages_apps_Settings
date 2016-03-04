@@ -23,6 +23,12 @@
         android:title="@string/status_bar_show_clock_title"
         android:defaultValue="true" />
 
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="clock_color"
+        android:title="@string/clock_color_title"
+        android:defaultValue="0xffffff"
+        android:dependency="status_bar_show_clock" />
+
     <com.android.settings.mallow.SystemSettingSwitchPreference
         android:key="clock_use_second"
         android:title="@string/status_bar_show_clock_second_title"
