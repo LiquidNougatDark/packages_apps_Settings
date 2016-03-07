@@ -95,7 +95,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_LCD_DENSITY = "lcd_density";
-    private static final String KEY_DOZE = "doze";
+    private static final String KEY_DOZE_FRAGMENT = "doze_fragment";
     private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
@@ -128,7 +128,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private ListPreference mLcdDensityPreference;
-    private SwitchPreference mDozePreference;
+    private PreferenceScreen mDozeFragement;
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
@@ -238,11 +238,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_LIFT_TO_WAKE);
         }
 
-        if (isDozeAvailable(activity)) {
-            mDozePreference = (SwitchPreference) findPreference(KEY_DOZE);
-            mDozePreference.setOnPreferenceChangeListener(this);
-        } else {
-            removePreference(KEY_DOZE);
+        mDozeFragement = (PreferenceScreen) findPreference(KEY_DOZE_FRAGMENT);
+        if (!isDozeAvailable(activity)) {
+            getPreferenceScreen().removePreference(mDozeFragement);
+            mDozeFragement = null;
         }
 		
 		mTapToWakePreference = (SwitchPreference) findPreference(KEY_TAP_TO_WAKE);
@@ -482,6 +481,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
         updateState();
+
+        boolean dozeEnabled = Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.DOZE_ENABLED, 1) != 0;
+        if (mDozeFragement != null) {
+            mDozeFragement.setSummary(dozeEnabled
+                    ? R.string.summary_doze_enabled : R.string.summary_doze_disabled);
+        }
+
         getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 mAccelerometerRotationObserver);
@@ -523,12 +530,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mLiftToWakePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), WAKE_GESTURE_ENABLED, 0);
             mLiftToWakePreference.setChecked(value != 0);
-        }
-
-        // Update doze if it is available.
-        if (mDozePreference != null) {
-            int value = Settings.Secure.getInt(getContentResolver(), DOZE_ENABLED, 1);
-            mDozePreference.setChecked(value != 0);
         }
 
         // Update tap to wake if it is available.
@@ -611,10 +612,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mLiftToWakePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), WAKE_GESTURE_ENABLED, value ? 1 : 0);
-        }
-        if (preference == mDozePreference) {
-            boolean value = (Boolean) objValue;
-            Settings.Secure.putInt(getContentResolver(), DOZE_ENABLED, value ? 1 : 0);
         }
         if (preference == mTapToWakePreference) {
             boolean value = (Boolean) objValue;
@@ -777,7 +774,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         result.add(KEY_LIFT_TO_WAKE);
                     }
                     if (!isDozeAvailable(context)) {
-                        result.add(KEY_DOZE);
+                        result.add(KEY_DOZE_FRAGMENT);
                     }
                     if (!RotationPolicy.isRotationLockToggleVisible(context)) {
                         result.add(KEY_AUTO_ROTATE);

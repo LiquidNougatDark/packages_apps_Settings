@@ -16,51 +16,12 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/display_settings"
-        settings:keywords="@string/keywords_display">
+                  android:title="@string/display_settings"
+                  settings:keywords="@string/keywords_display">
 
-        <PreferenceCategory
-            android:key="dashboard_category"
-            android:title="@string/dashboard_category">
-
-            <ListPreference
-                android:key="dashboard_columns"
-                android:title="@string/dashboard_columns_title"
-                android:dialogTitle="@string/dashboard_columns_dialog_title"
-                android:entries="@array/dashboard_columns_entries"
-                android:entryValues="@array/dashboard_columns_values"
-                android:summary="@string/dashboard_columns_summary"
-                android:persistent="false" />
-
-            <com.android.settings.mallow.SystemSettingSwitchPreference
-                android:key="dashboard_tileview_double_lines"
-                android:title="@string/dashboard_tileview_double_lines_title"
-                android:summary="@string/dashboard_tileview_double_lines_summary"
-                android:defaultValue="false" />
-
-            <com.android.settings.mallow.SystemSettingSwitchPreference
-                android:key="dashboard_tileview_dividers"
-                android:title="@string/dashboard_tileview_dividers_title"
-                android:summary="@string/dashboard_tileview_dividers_summary"
-                android:defaultValue="false" />
-
-            <ListPreference
-                android:key="dashboard_switches"
-                android:title="@string/dashboard_switches_title"
-                android:dialogTitle="@string/dashboard_switches_dialog_title"
-                android:entries="@array/dashboard_switches_entries"
-                android:entryValues="@array/dashboard_switches_values"
-                android:summary="@string/dashboard_switches_summary"
-                android:persistent="false" />
-
-        </PreferenceCategory>
-
-        <PreferenceScreen
-                android:key="brightness"
-                android:title="@string/brightness"
-                settings:keywords="@string/keywords_display_brightness_level">
-            <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
-        </PreferenceScreen>
+    <PreferenceCategory
+        android:key="display"
+        android:title="@string/display_label">
 
         <SwitchPreference
                 android:key="auto_brightness"
@@ -70,21 +31,33 @@
                 android:persistent="false" />
 
         <PreferenceScreen
+                android:key="doze_fragment"
+                android:title="@string/doze_title"
+                android:fragment="com.android.settings.mallow.AmbientSettings" />
+
+        <PreferenceScreen
+                android:key="brightness"
+                android:title="@string/brightness"
+                settings:keywords="@string/keywords_display_brightness_level">
+            <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+                android:key="wifi_display"
+                android:title="@string/wifi_display_settings_title"
+                settings:keywords="@string/keywords_display_cast_screen"
+                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
+        <PreferenceScreen
+                android:key="screensaver"
+                android:title="@string/screensaver_settings_title"
+                android:fragment="com.android.settings.DreamSettings" />
+
+        <PreferenceScreen
                 android:key="display_rotation"
                 android:title="@string/display_rotation_title"
                 android:summary="@string/display_rotation_summary"
                 android:fragment="com.android.settings.mallow.DisplayRotation" />
-
-        <ListPreference
-    	        android:key="lcd_density"
-                android:title="@string/lcd_density"
-                android:persistent="false" />
-
-        <PreferenceScreen
-                android:key="expanded_desktop"
-                android:title="@string/power_menu_expanded_desktop"
-                android:summary="@string/expanded_desktop_summary"
-                android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment" />
 
         <ListPreference
                 android:key="screen_timeout"
@@ -94,39 +67,17 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
-        <SwitchPreference
-                android:key="camera_gesture"
-                android:title="@string/camera_gesture_title"
-                android:summary="@string/camera_gesture_desc"
-                android:persistent="false" />
+    </PreferenceCategory>
 
-        <SwitchPreference
-                android:key="camera_double_tap_power_gesture"
-                android:title="@string/camera_double_tap_power_gesture_title"
-                android:summary="@string/camera_double_tap_power_gesture_desc"
-                android:persistent="false" />
+    <PreferenceCategory
+        android:key="category_interface_options"
+        android:title="@string/category_display_interface_title" >
 
         <PreferenceScreen
-    	        android:key="multitwindow"
-                android:fragment="com.android.settings.mallow.fragments.MultiWindow"
-                android:title="@string/multiwindow_settings_title" />
-
-        <PreferenceScreen
-                android:key="screensaver"
-                android:title="@string/screensaver_settings_title"
-                android:fragment="com.android.settings.DreamSettings" />
-
-        <SwitchPreference
-                android:key="doze"
-                android:title="@string/doze_title"
-                android:summary="@string/doze_summary"
-                android:persistent="false" />
-
-        <SwitchPreference
-                android:key="tap_to_wake"
-                android:title="@string/tap_to_wake"
-                android:summary="@string/tap_to_wake_summary"
-                android:persistent="false" />
+                android:key="expanded_desktop"
+                android:title="@string/power_menu_expanded_desktop"
+                android:summary="@string/expanded_desktop_summary"
+                android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment" />
 
         <com.android.settings.FontDialogPreference
                 android:key="font_size"
@@ -135,26 +86,81 @@
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <ListPreference
+    	        android:key="lcd_density"
+                android:title="@string/lcd_density"
+                android:persistent="false" />
+
+        <PreferenceScreen
+    	        android:key="multitwindow"
+                android:fragment="com.android.settings.mallow.fragments.MultiWindow"
+                android:title="@string/multiwindow_settings_title" />
+
         <com.android.settings.DropDownPreference
                 android:key="auto_rotate"
                 android:title="@string/display_auto_rotate_title" />
 
-        <PreferenceScreen
-                android:key="wifi_display"
-                android:title="@string/wifi_display_settings_title"
-                settings:keywords="@string/keywords_display_cast_screen"
-                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+    </PreferenceCategory>
 
-        <PreferenceCategory
-            android:key="category_wakeup_options"
-            android:title="@string/wakeup_options_title" >
+    <PreferenceCategory
+        android:key="dashboard_category"
+        android:title="@string/dashboard_category">
 
-            <SwitchPreference
+        <ListPreference
+                android:key="dashboard_columns"
+                android:title="@string/dashboard_columns_title"
+                android:dialogTitle="@string/dashboard_columns_dialog_title"
+                android:entries="@array/dashboard_columns_entries"
+                android:entryValues="@array/dashboard_columns_values"
+                android:summary="@string/dashboard_columns_summary"
+                android:persistent="false" />
+
+        <com.android.settings.mallow.SystemSettingSwitchPreference
+                android:key="dashboard_tileview_dividers"
+                android:title="@string/dashboard_tileview_dividers_title"
+                android:summary="@string/dashboard_tileview_dividers_summary"
+                android:defaultValue="false" />
+
+        <com.android.settings.mallow.SystemSettingSwitchPreference
+                android:key="dashboard_tileview_double_lines"
+                android:title="@string/dashboard_tileview_double_lines_title"
+                android:summary="@string/dashboard_tileview_double_lines_summary"
+                android:defaultValue="false" />
+
+        <ListPreference
+                android:key="dashboard_switches"
+                android:title="@string/dashboard_switches_title"
+                android:dialogTitle="@string/dashboard_switches_dialog_title"
+                android:entries="@array/dashboard_switches_entries"
+                android:entryValues="@array/dashboard_switches_values"
+                android:summary="@string/dashboard_switches_summary"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_wakeup_options"
+        android:title="@string/wakeup_options_title" >
+
+        <SwitchPreference
+                android:key="camera_double_tap_power_gesture"
+                android:title="@string/camera_double_tap_power_gesture_title"
+                android:summary="@string/camera_double_tap_power_gesture_desc"
+                android:persistent="false" />
+
+        <SwitchPreference
+                android:key="tap_to_wake"
+                android:title="@string/tap_to_wake"
+                android:summary="@string/tap_to_wake_summary"
+                android:persistent="false" />
+
+        <SwitchPreference
                 android:key="wakeup_when_plugged_unplugged"
                 android:title="@string/wakeup_when_plugged_unplugged_title"
                 android:summary="@string/wakeup_when_plugged_unplugged_summary"
                 android:defaultValue="true"
                 android:persistent="false" />
-         </PreferenceCategory>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
