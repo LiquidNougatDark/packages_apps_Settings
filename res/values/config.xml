@@ -41,4 +41,7 @@
     <!-- Volume rocker support. Some devices do not have a volume rocker. -->
     <bool name="has_volume_rocker">true</bool>
 
+    <!-- When true enable color temperature setting. -->
+    <bool name="config_enableColorTemperature">false</bool>
+
 </resources>
