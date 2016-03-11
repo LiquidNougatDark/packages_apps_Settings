@@ -37,7 +37,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.cm.PowerMenuConstants;
 
-import com.android.settings.widget.SeekBarPreferenceCHOS;
+import com.android.settings.mallow.SeekBarPreferenceCHOS;
 import com.android.internal.util.mallow.MallowUtils;
 import static com.android.internal.util.cm.PowerMenuConstants.*;
 import com.android.settings.widget.NumberPickerPreference;
@@ -119,9 +119,11 @@ public class PowerMenu extends SettingsPreferenceFragment
                 mLockdownPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
             } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
                 mBugReportPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
-            } else if (action.equals(GLOBAL_ACTION_KEY_TORCH)) {
-                mTorchPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_TORCH);
-            } else if (
+            } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
+                mSilentPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
+			} else if (action.equals(GLOBAL_ACTION_KEY_TORCH)) {
+                mTorchPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_TORCH);	
+            }
         }
 
         mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
@@ -142,7 +144,7 @@ public class PowerMenu extends SettingsPreferenceFragment
 		
 		// Power menu alpha
     	mPowerMenuAlpha =
-        	(SeekBarPreferenceCham) mPrefSet.findPreference(PREF_TRANSPARENT_POWER_MENU);
+        	(SeekBarPreferenceCHOS) mPrefSet.findPreference(PREF_TRANSPARENT_POWER_MENU);
         int powerMenuAlpha = Settings.System.getInt(mCr,
         	Settings.System.TRANSPARENT_POWER_MENU, 100);
         mPowerMenuAlpha.setValue(powerMenuAlpha / 1);
@@ -151,7 +153,7 @@ public class PowerMenu extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DEVELOPMENT; //TODO: add our own logging metrics?
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override
@@ -170,12 +172,13 @@ public class PowerMenu extends SettingsPreferenceFragment
             mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
         }
 
-		if (mTorchPref != null) {
-			if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
-            	mTorchPref.setEnabled(false);
-        	} else {
-        		mTorchPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_TORCH));
-			}
+	if (mTorchPref != null) {
+	    if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
+                mTorchPref.setEnabled(false);
+            } else {
+        	mTorchPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_TORCH));
+	    }
+	}
 
         if (mUsersPref != null) {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
@@ -277,10 +280,10 @@ public class PowerMenu extends SettingsPreferenceFragment
                     value);
             return true;
 		} else if (preference == mPowerMenuAlpha) {
-                int alpha = (Integer) newValue;
-				Settings.System.putInt(mCr,
-                        Settings.System.TRANSPARENT_POWER_MENU, alpha * 1);
-                return true;	
+            int alpha = (Integer) newValue;
+		    Settings.System.putInt(mCr,
+                Settings.System.TRANSPARENT_POWER_MENU, alpha * 1);
+            return true;	
         }
         return false;
     }

@@ -125,7 +125,7 @@ public class RecentSidebar extends SettingsPreferenceFragment
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(R.string.shortcut_action_reset);
         alertDialog.setMessage(R.string.reset_message);
-        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 resetValues();
             }

@@ -662,6 +662,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                     (Boolean) objValue ? 1 : 0);
         }
+        if (KEY_LCD_DENSITY.equals(key)) {
+            try {
+                int value = Integer.parseInt((String) objValue);
+                writeLcdDensityPreference(preference.getContext(), value);
+                updateLcdDensityPreferenceDescription(value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "could not persist display density setting", e);
+            }
+        }
         return true;
     }
 
@@ -750,21 +759,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         };
         task.execute();
-    }
-
-	@Override
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-		final String key = preference.getKey();
-		if (KEY_LCD_DENSITY.equals(key)) {
-            try {
-                int value = Integer.parseInt((String) objValue);
-                writeLcdDensityPreference(preference.getContext(), value);
-                updateLcdDensityPreferenceDescription(value);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist display density setting", e);
-            }
-        }
-        return true;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

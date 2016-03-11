@@ -61,11 +61,6 @@ public class CarrierLabel extends SettingsPreferenceFragment implements OnPrefer
     private ColorPickerPreference mCarrierColorPicker;
 
     @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -96,6 +91,11 @@ public class CarrierLabel extends SettingsPreferenceFragment implements OnPrefer
         } else {
             updateCustomLabelTextSummary();
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     private void updateCustomLabelTextSummary() {

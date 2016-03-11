@@ -37,7 +37,7 @@ import android.provider.Settings.SettingNotFoundException;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.settings.widget.SeekBarPreferenceCHOS;
+import com.android.settings.mallow.SeekBarPreferenceCHOS;
 
 public class SoundSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
@@ -124,7 +124,7 @@ public class SoundSettings extends SettingsPreferenceFragment
                     (Boolean) objValue ? 1 : 0);
             return true;
         } else if (KEY_CAMERA_SOUNDS.equals(key)) {
-            final String value = ((Boolean) o) ? "1" : "0";
+            final String value = ((Boolean) objValue) ? "1" : "0";
             SystemProperties.set(PROP_CAMERA_SOUND, value);
             return true;
         } else if (KEY_SAFE_HEADSET_VOLUME.equals(key)) {
@@ -141,7 +141,7 @@ public class SoundSettings extends SettingsPreferenceFragment
                 Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, val);
             return true;
         } else if (preference == mVolumeDialogAlpha) {
-            int alpha = (Integer) newValue;
+            int alpha = (Integer) objValue;
             Settings.System.putInt(getContentResolver(),
                 Settings.System.TRANSPARENT_VOLUME_DIALOG, alpha * 1);
             return true;  

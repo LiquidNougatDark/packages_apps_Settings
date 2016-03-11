@@ -16,6 +16,8 @@
 
 package com.android.settings.mallow;
 
+import com.android.internal.logging.MetricsLogger;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -144,7 +146,7 @@ public class NavBarButtonStyle extends SettingsPreferenceFragment
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(R.string.reset);
         alertDialog.setMessage(R.string.navbar_button_style_reset_message);
-        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Settings.System.putInt(getActivity().getContentResolver(),
                         Settings.System.NAVIGATION_BAR_BUTTON_TINT, -2);

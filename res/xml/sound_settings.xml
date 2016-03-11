@@ -33,8 +33,7 @@
             android:max="255"
             settings:min="0"
             settings:unitsLeft=""
-            settings:unitsRight=""
-            settings:persistent="false" />
+            settings:unitsRight="" />
 
         <SwitchPreference
             android:key="camera_sounds"

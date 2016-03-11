@@ -36,7 +36,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.internal.util.slim.DeviceUtils;
-
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 
@@ -90,6 +90,11 @@ public class NavbarStyleDimenSettings extends SettingsPreferenceFragment impleme
     }
 
     @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(0, MENU_RESET, 0, R.string.reset)
                 .setIcon(R.drawable.ic_settings_reset_button) // use the reset settings icon
@@ -111,7 +116,7 @@ public class NavbarStyleDimenSettings extends SettingsPreferenceFragment impleme
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(R.string.reset);
         alertDialog.setMessage(R.string.navbar_dimensions_reset_message);
-        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 int height = mapChosenDpToPixels(48);
                 Settings.System.putInt(getContentResolver(),
@@ -132,11 +137,6 @@ public class NavbarStyleDimenSettings extends SettingsPreferenceFragment impleme
         });
         alertDialog.setNegativeButton(R.string.cancel, null);
         alertDialog.create().show();
-    }
-
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override

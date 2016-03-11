@@ -35,7 +35,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.cyanogenmod.PackageListAdapter;
 import com.android.settings.cyanogenmod.PackageListAdapter.PackageItem;
-import com.android.settings.widget.SeekBarPreferenceCham;
+import com.android.settings.mallow.SeekBarPreferenceCHOS;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,12 +102,12 @@ public class HeadsUp extends SettingsPreferenceFragment implements
         mAddBlacklistPref.setOnPreferenceClickListener(this);
 		mAddWhitelistPref.setOnPreferenceClickListener(this);
 
-        mHeadsUpTimeout = (SeekBarPreferenceCham) findPreference(HEADS_UP_TIMEOUT);
+        mHeadsUpTimeout = (SeekBarPreferenceCHOS) findPreference(HEADS_UP_TIMEOUT);
         mHeadsUpTimeout.setValue(Settings.System.getInt(getContentResolver(),
                 Settings.System.HEADS_UP_TIMEOUT, 10000));
         mHeadsUpTimeout.setOnPreferenceChangeListener(this);
 
-        mHeadsUpSnooze = (SeekBarPreferenceCham) findPreference(HEADS_UP_SNOOZE_LENGTH_MS);
+        mHeadsUpSnooze = (SeekBarPreferenceCHOS) findPreference(HEADS_UP_SNOOZE_LENGTH_MS);
         mHeadsUpSnooze.setValue(Settings.System.getInt(getContentResolver(),
                 Settings.System.HEADS_UP_SNOOZE_LENGTH_MS, 60 / 1000));
         mHeadsUpSnooze.setOnPreferenceChangeListener(this);

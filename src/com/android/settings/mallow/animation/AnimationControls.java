@@ -76,7 +76,7 @@ public class AnimationControls extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.system_animations_title);
+
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.aokp_animation_control);
 

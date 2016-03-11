@@ -188,7 +188,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         initRingtones(mSoundCategory);
         initVibrateWhenRinging(mSoundCategory);
-        
+
         initIncreasingRing(mSoundCategory);
 
         final PreferenceCategory notification = (PreferenceCategory)
@@ -220,8 +220,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             volumePref.onActivityResume();
         }
         if (mIncreasingRingVolume != null) {
-			mIncreasingRingVolume.onActivityResume();
-		}
+            mIncreasingRingVolume.onActivityResume();
+        }
         boolean isRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME);
         for (String key : RESTRICTED_KEYS) {
             Preference pref = findPreference(key);
@@ -236,8 +236,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         super.onPause();
         mVolumeCallback.stopSample();
         if (mIncreasingRingVolume != null) {
-			mIncreasingRingVolume.stopSample();
-		}
+            mIncreasingRingVolume.stopSample();
+        }
         mSettingsObserver.register(false);
         mReceiver.register(false);
     }
@@ -330,6 +330,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             if (mCurrent != null && mCurrent != sbv) {
                 mCurrent.stopSample();
             }
+            if (mIncreasingRingVolume != null) {
+                mIncreasingRingVolume.stopSample();
+            }
             mCurrent = sbv;
             if (mCurrent != null) {
                 mHandler.removeMessages(H.STOP_SAMPLE);
@@ -337,9 +340,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             }
         }
 
-        if (mIncreasingRingVolume != null) {
-			mIncreasingRingVolume.stopSample();
-		}
         @Override
         public void onStreamValueChanged(int stream, int progress) {
             // noop
@@ -740,8 +740,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 case STOP_SAMPLE:
                     mVolumeCallback.stopSample();
                     if (mIncreasingRingVolume != null) {
-						mIncreasingRingVolume.stopSample();
-					}
+                        mIncreasingRingVolume.stopSample();
+                    }
                     break;
                 case UPDATE_EFFECTS_SUPPRESSOR:
                     updateEffectsSuppressor();

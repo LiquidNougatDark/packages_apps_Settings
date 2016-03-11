@@ -30,6 +30,7 @@ import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -83,14 +84,14 @@ public class NotificationDrawer extends SettingsPreferenceFragment
         // Smart pulldown
 		mSmartPulldown = (ListPreference) findPreference(PREF_SMART_PULLDOWN);
 		mSmartPulldown.setOnPreferenceChangeListener(this);
-        int smartPulldown = Settings.System.getInt(resolver,
+        int smartPulldown = Settings.System.getInt(getContentResolver(),
                 Settings.System.QS_SMART_PULLDOWN, 0);
         mSmartPulldown.setValue(String.valueOf(smartPulldown));
         updateSmartPulldownSummary(smartPulldown);
 
         // QS shade alpha
         mQSShadeAlpha =
-        (SeekBarPreferenceCham) prefSet.findPreference(PREF_QS_TRANSPARENT_SHADE);
+        (SeekBarPreferenceCHOS) prefSet.findPreference(PREF_QS_TRANSPARENT_SHADE);
         int qSShadeAlpha = Settings.System.getInt(getContentResolver(),
                     Settings.System.QS_TRANSPARENT_SHADE, 255);
         mQSShadeAlpha.setValue(qSShadeAlpha / 1);
@@ -98,7 +99,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment
 
 		// QS header alpha
         mQSHeaderAlpha =
-        	(SeekBarPreferenceCham) prefSet.findPreference(PREF_QS_TRANSPARENT_HEADER);
+        	(SeekBarPreferenceCHOS) prefSet.findPreference(PREF_QS_TRANSPARENT_HEADER);
         int qSHeaderAlpha = Settings.System.getInt(getContentResolver(),
         	Settings.System.QS_TRANSPARENT_HEADER, 255);
         mQSHeaderAlpha.setValue(qSHeaderAlpha / 1);
@@ -116,11 +117,12 @@ public class NotificationDrawer extends SettingsPreferenceFragment
         // Flashlight notification
         mFlashlightNotification = (SwitchPreference) findPreference(FLASHLIGHT_NOTIFICATION);
         mFlashlightNotification.setOnPreferenceChangeListener(this);
-        if (!screwdUtils.deviceSupportsFlashLight(getActivity())) {
+
+        if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
             prefSet.removePreference(mFlashlightNotification);
         } else {
-        mFlashlightNotification.setChecked((Settings.System.getInt(resolver,
-            Settings.System.FLASHLIGHT_NOTIFICATION, 0) == 1));
+            mFlashlightNotification.setChecked((Settings.System.getInt
+                (getContentResolver(), Settings.System.FLASHLIGHT_NOTIFICATION, 0) == 1));
         }
     }
 
@@ -139,7 +141,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             updateQuickPulldownSummary(statusQuickPulldown);
             return true;
         } else if (preference == mSmartPulldown) {
-            int smartPulldown = Integer.valueOf((String) newValue);
+            int smartPulldown = Integer.valueOf((String) objValue);
                     Settings.System.putInt(getContentResolver(),
                     Settings.System.QS_SMART_PULLDOWN, smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
@@ -160,7 +162,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment
                     Settings.System.QS_TRANSPARENT_HEADER, alpha * 1);
             return true;			
         } else if (preference == mNumColumns) {
-            int numColumns = Integer.valueOf((String) newValue);
+            int numColumns = Integer.valueOf((String) objValue);
             Settings.Secure.putIntForUser(getContentResolver(), 
                     Settings.Secure.QS_NUM_TILE_COLUMNS,
                     numColumns, UserHandle.USER_CURRENT);
@@ -182,7 +184,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             String direction = res.getString(value == 2
                     ? (isRtl ? R.string.quick_pulldown_right : R.string.quick_pulldown_left)
                     : (isRtl ? R.string.quick_pulldown_left : R.string.quick_pulldown_right));
-            mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary, direction));
         }
     }
 

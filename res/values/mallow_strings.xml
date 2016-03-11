@@ -467,6 +467,7 @@
     <string name="restart_systemui">Restart SystemUI</string>
 
     <!-- SlimDim -->
+    <string name="navbar_slimdim_cat">SlimDim</string>
     <string name="dim_nav_buttons_category">SlimDim</string>
     <string name="dim_nav_buttons_title">Dim buttons after inactivity</string>
     <string name="dim_nav_buttons_summary">Dim navigation bar buttons after not interacting with navigation bar for a specified time</string>
@@ -684,12 +685,17 @@
 
     <!-- Button shorcut actions -->
     <string name="shortcut_action_back">Back</string>
+    <string name="shortcut_action_camera">Camera</string>
+    <string name="shortcut_action_media_next">Music - next track</string>
+    <string name="shortcut_action_media_play_pause">Music - play/pause</string>
+    <string name="shortcut_action_media_previous">Music - previous track</string>
+    <string name="shortcut_action_wake_device">Wake up device</string>
     <string name="shortcut_action_app">Custom app</string>
     <string name="shortcut_action_expanded_desktop">Expanded desktop</string>
     <string name="shortcut_action_home">Home</string>
     <string name="shortcut_action_kill">Kill app</string>
     <string name="shortcut_action_lastapp">Last app</string>
-    <string name="shortcut_action_menu_big">Menu big</string>
+    <string name="shortcut_action_menu_big">Menu Big</string>
     <string name="shortcut_action_navbar">Navigation bar</string>
     <string name="shortcut_action_notifications">Notifications</string>
     <string name="shortcut_action_menu_big">Menu</string>
@@ -716,6 +722,7 @@
     <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
 
     <!-- Navigation bar -->
+    <string name="interface_navbar_cat">Navbar options</string>
     <string name="navigation_bar_size_42_dp_default">42 dp (default)</string>
     <string name="navigation_bar_size_36_dp">36 dp</string>
     <string name="navigation_bar_size_30_dp">30 dp</string>
@@ -1312,7 +1319,12 @@
     <!-- Heads up -->
     <string name="heads_up_title">Heads up</string>
     <string name="heads_up_summary">Enable or disable popup notifications</string>
+    
+    <!-- Heads up -->
+    <string name="headsup_section_header">Heads up notifications</string>
     <string name="heads_up_notifications">Heads up</string>
+    <string name="summary_heads_up_enabled">Pop-up notifications are enabled</string>
+    <string name="summary_heads_up_disabled">Pop-up notifications are disabled</string>
     <string name="heads_up_snooze">Snooze</string>
     <string name="heads_up_timeout">Timeout</string>
     <string name="add_heads_up_package">Add app</string>

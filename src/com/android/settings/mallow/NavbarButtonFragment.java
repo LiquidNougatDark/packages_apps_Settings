@@ -16,6 +16,8 @@
 
 package com.android.settings.mallow;
 
+import com.android.internal.logging.MetricsLogger;
+
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;

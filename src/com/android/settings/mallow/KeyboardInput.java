@@ -64,7 +64,7 @@ public class KeyboardInput extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.keyboad_input);
+        addPreferencesFromResource(R.xml.keyboard_input);
 
         mDisableFullscreenKeyboard =
             (SwitchPreference) findPreference(PREF_DISABLE_FULLSCREEN_KEYBOARD);
@@ -175,8 +175,8 @@ public class KeyboardInput extends SettingsPreferenceFragment
             return frag;
         }
 
-        InputMethodsSettings getOwner() {
-            return (InputMethodsSettings) getTargetFragment();
+        KeyboardInput getOwner() {
+            return (KeyboardInput) getTargetFragment();
         }
 
         @Override
