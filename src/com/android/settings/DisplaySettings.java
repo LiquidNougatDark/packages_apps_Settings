@@ -77,6 +77,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.android.settings.mallow.DisplayRotation;
+import com.android.settings.mallow.SeekBarPreference;
 import com.android.settings.dashboard.DashboardContainerView;
 
 import java.util.ArrayList;
@@ -117,6 +118,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String DASHBOARD_COLUMNS = "dashboard_columns";
     private static final String DASHBOARD_SWITCHES = "dashboard_switches";
 
+    private static final String SETTINGS_TITLE_TEXT_SIZE  = "settings_title_text_size";
+    private static final String SETTINGS_CATEGORY_TEXT_SIZE  = "settings_category_text_size";
+
     private PreferenceScreen mDisplayRotationPreference;
 
     private FontDialogPreference mFontSizePref;
@@ -136,6 +140,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
     private ListPreference mDashboardColumns;
 	private ListPreference mDashboardSwitches;
+    private SeekBarPreference mDashTitleTextSize;
+    private SeekBarPreference mDashCategoryTextSize;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -189,6 +195,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 getContentResolver(), Settings.System.DASHBOARD_SWITCHES, 0)));
         mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
         mDashboardSwitches.setOnPreferenceChangeListener(this);
+
+        mDashTitleTextSize =
+                (SeekBarPreference) findPreference(SETTINGS_TITLE_TEXT_SIZE);
+        mDashTitleTextSize.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SETTINGS_TITLE_TEXT_SIZE, 14));
+        mDashTitleTextSize.setOnPreferenceChangeListener(this);
+
+        mDashCategoryTextSize =
+                (SeekBarPreference) findPreference(SETTINGS_CATEGORY_TEXT_SIZE);
+        mDashCategoryTextSize.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SETTINGS_CATEGORY_TEXT_SIZE, 10));
+        mDashCategoryTextSize.setOnPreferenceChangeListener(this);
 
 		mLcdDensityPreference = (ListPreference) findPreference(KEY_LCD_DENSITY);
         if (mLcdDensityPreference != null) {
@@ -642,6 +660,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Integer.valueOf((String) objValue));
             mDashboardSwitches.setValue(String.valueOf(objValue));
             mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
+            return true;
+        }
+        if (preference == mDashTitleTextSize) {
+            int width = ((Integer)objValue).intValue();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SETTINGS_TITLE_TEXT_SIZE, width);
+            return true;
+        }
+        if (preference == mDashCategoryTextSize) {
+            int width = ((Integer)objValue).intValue();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SETTINGS_CATEGORY_TEXT_SIZE, width);
             return true;
         }
         if (preference == mCameraDoubleTapPowerGesturePreference) {

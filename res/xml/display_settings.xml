@@ -141,6 +141,24 @@
                 android:summary="@string/dashboard_switches_summary"
                 android:persistent="false" />
 
+        <com.android.settings.mallow.SeekBarPreference
+                android:key="settings_category_text_size"
+                android:title="@string/dash_category_text_size"
+                android:defaultValue="14"
+                android:max="25"
+                settings:minimum="4"
+                settings:unitsLeft=""
+                settings:unitsRight="dp" />
+
+        <com.android.settings.mallow.SeekBarPreference
+                android:key="settings_title_text_size"
+                android:title="@string/dash_title_text_size"
+                android:defaultValue="14"
+                android:max="25"
+                settings:minimum="4"
+                settings:unitsLeft=""
+                settings:unitsRight="dp" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
