@@ -16,35 +16,26 @@
 
 package com.android.settings.mallow;
 
-import com.android.internal.logging.MetricsLogger;
-
-import android.content.ContentResolver;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.UserHandle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.R;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.mallow.SeekBarPreferenceCHOS;
 
 public class StatusBar extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";
 
-    private static final String PREF_CUSTOM_HEADER = "status_bar_custom_header";
-    private static final String PREF_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
+    private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
 
-    private SwitchPreference mCustomHeader;
-    private SwitchPreference mCustomHeaderDefault;
+    private SeekBarPreferenceChOS mHeaderShadow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,31 +43,12 @@ public class StatusBar extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.status_bar);
 
-        PreferenceScreen prefSet = getPreferenceScreen();
-		
-		ContentResolver resolver = getActivity().getContentResolver();
-
-        PackageManager pm = getPackageManager();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        PreferenceScreen prefSet = getPreferenceScreen();
-        ContentResolver resolver = getActivity().getContentResolver();
-
-        // Status bar custom header hd
-        mCustomHeader = (SwitchPreference) findPreference(PREF_CUSTOM_HEADER_DEFAULT);
-        mCustomHeader.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT, 0) == 1));
-        mCustomHeader.setOnPreferenceChangeListener(this);
-
-        // Status bar custom header default
-        mCustomHeaderDefault = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER_DEFAULT);
-        mCustomHeaderDefault.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT, 0) == 1));
-        mCustomHeaderDefault.setOnPreferenceChangeListener(this);
+        // Status bar custom header shadow
+        mHeaderShadow = (SeekBarPreferenceCHOS) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        final int headerShadow = Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
+        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
+        mHeaderShadow.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -84,35 +56,19 @@ public class StatusBar extends SettingsPreferenceFragment
         return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-		ContentResolver resolver = getActivity().getContentResolver();
-		if (preference == mCustomHeader) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    (Boolean) newValue ? 1 : 0);
-            return true;
-        } else if (preference == mCustomHeaderDefault) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT,
-                    (Boolean) newValue ? 1 : 0);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    0);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    1);
-            return true;
-        }
-        return false;
-    }
-
-	@Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (preference == mHeaderShadow) {
+         	Integer headerShadow = (Integer) newValue;
+         	int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
+         	Settings.System.putInt(getContentResolver(),
+                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
+            return true;
+        }
+        return false;
     }
 }
