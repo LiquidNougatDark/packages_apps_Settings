@@ -37,7 +37,7 @@
         android:fragment="com.android.settings.mallow.BatteryStyles" />
 
     <PreferenceScreen
-        android:key="app_circle_bar"
+        android:key="app_circlebar"
         android:title="@string/circle_bar_title"
         android:summary="@string/circle_bar_summary"
         android:fragment="com.android.settings.mallow.AppCircleBar" />
@@ -85,10 +85,10 @@
         android:fragment="com.android.settings.mallow.NotificationDrawer" />
 
     <PreferenceScreen
-        android:key="pa_pie_control"
-        android:title="@string/pa_pie_control_title"
-        android:summary="@string/pa_pie_control_summary"
-        android:fragment="com.android.settings.paranoid.PieControl" />
+        android:key="pie_control"
+        android:title="@string/pie_control_title"
+        android:summary="@string/pie_control_summary"
+        android:fragment="com.android.settings.mallow.PieControl" />
 
     <PreferenceScreen
         android:key="power_menu"

@@ -838,8 +838,8 @@
     <string name="trigger_bottom_summary">Adjust the height of the trigger area</string>
 
     <!-- Pie control -->
-    <string name="pa_pie_control_title">Pie control</string>
-    <string name="pa_pie_control_summary">Customize various pie target abilities</string>
+    <string name="pie_control_title">Pie control</string>
+    <string name="pie_control_summary">Customize various pie target abilities</string>
     <string name="pa_pie_control_enable_title">Enable Pie Control</string>
     <string name="pa_pie_targets_title">Pie Targets</string>
     <string name="pa_pie_style_title">Pie Style</string>
