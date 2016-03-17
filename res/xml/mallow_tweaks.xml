@@ -25,9 +25,9 @@
         android:fragment="com.android.settings.mallow.AnimationControl" />
 
     <PreferenceScreen
-        android:key="app_sidebars"
-        android:title="@string/app_sidebars_title"
-        android:summary="@string/app_sidebars_summary"
+        android:key="app_sidebar"
+        android:title="@string/app_sidebar_title"
+        android:summary="@string/app_sidebar_summary"
         android:fragment="com.android.settings.mallow.AppSidebar" />
 
     <PreferenceScreen
@@ -35,6 +35,12 @@
         android:title="@string/battery_styles_title"
         android:summary="@string/battery_styles_summary"
         android:fragment="com.android.settings.mallow.BatteryStyles" />
+
+    <PreferenceScreen
+        android:key="app_circle_bar"
+        android:title="@string/circle_bar_title"
+        android:summary="@string/circle_bar_summary"
+        android:fragment="com.android.settings.mallow.AppCircleBar" />
 
     <PreferenceScreen
         android:key="clock_styles"

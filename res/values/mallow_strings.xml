@@ -806,10 +806,6 @@
     <string name="lockscreen_shortcuts_double_tap">Double tap</string>
     <string name="lockscreen_shortcuts_longpress">Longpress</string>
 
-    <!-- App sidebars -->
-    <string name="app_sidebars_title">App sidebars</string>
-    <string name="app_sidebars_summary">Chose between standard bar or spin wheel</string>
-
     <!-- App sidebar -->
     <string name="app_sidebar_title">App sidebar</string>
     <string name="app_sidebar_summary">Trigger apps using slide out bar</string>
