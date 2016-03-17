@@ -39,7 +39,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class BatteryStyles extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "BatteryStyles";
 
@@ -170,6 +170,7 @@ public class BatteryStyles extends SettingsPreferenceFragment
         return false;
     }
 
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         ContentResolver resolver = getActivity().getContentResolver();
         boolean value;

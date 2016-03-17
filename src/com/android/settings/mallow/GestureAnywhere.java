@@ -29,6 +29,7 @@ import android.view.Gravity;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.mallow.SeekBarPreference;
+import com.android.settings.gestureanywhere.*;
 
 import com.android.internal.logging.MetricsLogger;
 
