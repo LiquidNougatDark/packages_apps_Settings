@@ -43,6 +43,12 @@
         android:fragment="com.android.settings.mallow.ClockStyles" />
 
     <PreferenceScreen
+        android:key="gesture_anywhere"
+        android:title="@string/gesture_anywhere_title"
+        android:summary="@string/gesture_anywhere_summary"
+        android:fragment="com.android.settings.gestureanywhere.GestureAnywhereSettings"/>
+
+    <PreferenceScreen
         android:key="heads_up"
         android:title="@string/heads_up_title"
         android:summary="@string/heads_up_summary"
@@ -89,12 +95,6 @@
         android:title="@string/recent_apps_title"
         android:summary="@string/recent_apps_summary"
         android:fragment="com.android.settings.mallow.RecentApps" />
-
-    <PreferenceScreen
-        android:key="screen_gestures"
-        android:title="@string/screen_gestures_title"
-        android:summary="@string/screen_gestures_summary"
-        android:fragment="com.android.settings.mallow.ScreenGestures" />
 
     <PreferenceScreen
         android:key="sound_settings"
