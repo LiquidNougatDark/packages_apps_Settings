@@ -15,17 +15,28 @@
 */
 package com.android.settings.mallow;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.provider.Settings;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.provider.Settings;
+import android.preference.PreferenceScreen;
+import android.preference.PreferenceCategory;
+import android.preference.SwitchPreference;
+import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
+import android.view.WindowManagerGlobal;
 
 import com.android.internal.logging.MetricsLogger;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class BatteryStyles extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
@@ -34,12 +45,22 @@ public class BatteryStyles extends SettingsPreferenceFragment
 
     private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+    private static final String PREF_BATT_BAR = "battery_bar_list";
+    private static final String PREF_BATT_BAR_STYLE = "battery_bar_style";
+    private static final String PREF_BATT_BAR_COLOR = "battery_bar_color";
+    private static final String PREF_BATT_BAR_WIDTH = "battery_bar_thickness";
+    private static final String PREF_BATT_ANIMATE = "battery_bar_animate";
 
     private static final int STATUS_BAR_BATTERY_STYLE_HIDDEN = 4;
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 6;
 
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarBatteryShowPercent;
+    private ListPreference mBatteryBar;
+    private ListPreference mBatteryBarStyle;
+    private ListPreference mBatteryBarThickness;
+    private SwitchPreference mBatteryBarChargingAnimation;
+    private ColorPickerPreference mBatteryBarColor;
 
     @Override
     protected int getMetricsCategory() {
@@ -47,10 +68,11 @@ public class BatteryStyles extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.battery_styles);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        addPreferencesFromResource(R.xml.battery_styles);
+        PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY_STYLE);
@@ -69,6 +91,38 @@ public class BatteryStyles extends SettingsPreferenceFragment
         mStatusBarBatteryShowPercent.setSummary(mStatusBarBatteryShowPercent.getEntry());
         enableStatusBarBatteryDependents(batteryStyle);
         mStatusBarBatteryShowPercent.setOnPreferenceChangeListener(this);
+        
+        mBatteryBar = (ListPreference) findPreference(PREF_BATT_BAR);
+        mBatteryBar.setOnPreferenceChangeListener(this);
+        mBatteryBar.setValue((Settings.System.getInt(resolver,
+                        Settings.System.STATUSBAR_BATTERY_BAR, 0)) + "");
+
+        mBatteryBarStyle = (ListPreference) findPreference(PREF_BATT_BAR_STYLE);
+        mBatteryBarStyle.setOnPreferenceChangeListener(this);
+        mBatteryBarStyle.setValue((Settings.System.getInt(resolver,
+                Settings.System.STATUSBAR_BATTERY_BAR_STYLE, 0)) + "");
+
+        mBatteryBarColor = (ColorPickerPreference) findPreference(PREF_BATT_BAR_COLOR);
+        mBatteryBarColor.setOnPreferenceChangeListener(this);
+
+        mBatteryBarChargingAnimation = (SwitchPreference) findPreference(PREF_BATT_ANIMATE);
+        mBatteryBarChargingAnimation.setChecked(Settings.System.getInt(resolver,
+                Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE, 0) == 1);
+
+        mBatteryBarThickness = (ListPreference) findPreference(PREF_BATT_BAR_WIDTH);
+        mBatteryBarThickness.setOnPreferenceChangeListener(this);
+        mBatteryBarThickness.setValue((Settings.System.getInt(resolver,
+                Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1)) + "");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -90,6 +144,40 @@ public class BatteryStyles extends SettingsPreferenceFragment
                     resolver, Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, batteryShowPercent);
             mStatusBarBatteryShowPercent.setSummary(
                     mStatusBarBatteryShowPercent.getEntries()[index]);
+            return true;
+        } else if (preference == mBatteryBarColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer
+                    .valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(resolver,
+                    Settings.System.STATUSBAR_BATTERY_BAR_COLOR, intHex);
+            return true;
+        } else if (preference == mBatteryBar) {
+            int val = Integer.parseInt((String) newValue);
+            return Settings.System.putInt(resolver,
+                    Settings.System.STATUSBAR_BATTERY_BAR, val);
+        } else if (preference == mBatteryBarStyle) {
+            int val = Integer.parseInt((String) newValue);
+            return Settings.System.putInt(resolver,
+                    Settings.System.STATUSBAR_BATTERY_BAR_STYLE, val);
+        } else if (preference == mBatteryBarThickness) {
+            int val = Integer.parseInt((String) newValue);
+            return Settings.System.putInt(resolver,
+                    Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, val);
+        }
+        return false;
+    }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        boolean value;
+
+        if (preference == mBatteryBarChargingAnimation) {
+            Settings.System.putInt(resolver,
+                    Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE,
+                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
             return true;
         }
         return false;
