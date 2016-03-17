@@ -73,6 +73,12 @@
         android:fragment="com.android.settings.mallow.NotificationDrawer" />
 
     <PreferenceScreen
+        android:key="pa_pie_control"
+        android:title="@string/pa_pie_control_title"
+        android:summary="@string/pa_pie_control_summary"
+        android:fragment="com.android.settings.paranoid.PieControl" />
+
+    <PreferenceScreen
         android:key="power_menu"
         android:title="@string/power_menu_title"
         android:summary="@string/power_menu_summary"
