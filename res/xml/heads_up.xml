@@ -58,7 +58,7 @@
             android:summary="@string/add_heads_up_whitelist_summary" />
     </PreferenceCategory>
 
-    <com.android.settings.widget.SeekBarPreferenceCHOS
+    <com.android.settings.mallow.SeekBarPreferenceCHOS
             android:key="heads_up_snooze_length_ms"
             android:title="@string/heads_up_snooze"
             android:max="120"
@@ -68,7 +68,7 @@
             android:dependency="heads_up_notifications_enabled"
             android:persistent="false" />
 
-    <com.android.settings.widget.SeekBarPreferenceCHOS
+    <com.android.settings.mallow.SeekBarPreferenceCHOS
             android:key="heads_up_timeout"
             android:title="@string/heads_up_timeout"
             android:defaultValue="5"
