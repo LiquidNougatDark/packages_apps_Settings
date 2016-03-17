@@ -172,13 +172,13 @@ public class PowerMenu extends SettingsPreferenceFragment
             mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
         }
 
-	if (mTorchPref != null) {
-	    if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
-                mTorchPref.setEnabled(false);
-            } else {
-        	mTorchPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_TORCH));
+	    if (mTorchPref != null) {
+	         if (!MallowUtils.deviceSupportsFlashLight(getActivity())) {
+                 mTorchPref.setEnabled(false);
+                } else {
+        	     mTorchPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_TORCH));
+	         }
 	    }
-	}
 
         if (mUsersPref != null) {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
