@@ -100,6 +100,17 @@
                 android:icon="@drawable/ic_settings_mallow"
                 />
 
+        <!-- Themes -->
+        <dashboard-tile
+            android:id="@+id/theme_settings"
+            android:title="@string/themes_settings_title"
+            android:icon="@drawable/ic_settings_themes">
+            <intent
+                android:action="android.intent.action.MAIN" >
+                <categories android:name="cyanogenmod.intent.category.APP_THEMES" />
+            </intent>
+        </dashboard-tile>
+
     </dashboard-category>
 
     <!-- DEVICE -->
@@ -123,17 +134,6 @@
                 android:fragment="com.android.settings.DisplaySettings"
                 android:icon="@drawable/ic_settings_display"
                 />
-
-        <!-- Themes -->
-        <dashboard-tile
-            android:id="@+id/theme_settings"
-            android:title="@string/themes_settings_title"
-            android:icon="@drawable/ic_settings_themes">
-            <intent
-                android:action="android.intent.action.MAIN" >
-                <categories android:name="cyanogenmod.intent.category.APP_THEMES" />
-            </intent>
-        </dashboard-tile>
 
         <!-- Notifications -->
         <dashboard-tile
