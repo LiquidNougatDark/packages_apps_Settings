@@ -48,7 +48,8 @@ import java.util.List;
 
 public class PowerMenu extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
-    final static String TAG = "PowerMenuActions";
+
+    final static String TAG = "PowerMenu";
 
     private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";
     private static final String SCREENSHOT_DELAY = "screenshot_delay";
@@ -62,7 +63,6 @@ public class PowerMenu extends SettingsPreferenceFragment
     private SwitchPreference mUsersPref;
     private SwitchPreference mSettingsPref;
     private SwitchPreference mLockdownPref;
-    private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
     private SwitchPreference mTorchPref;
     private SlimSeekBarPreference mOnTheGoAlphaPref;
@@ -117,8 +117,6 @@ public class PowerMenu extends SettingsPreferenceFragment
                 mSettingsPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
             } else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
                 mLockdownPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
-            } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
-                mBugReportPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
             } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
                 mSilentPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
 			} else if (action.equals(GLOBAL_ACTION_KEY_TORCH)) {
@@ -200,21 +198,14 @@ public class PowerMenu extends SettingsPreferenceFragment
             mLockdownPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_LOCKDOWN));
         }
 
-        if (mBugReportPref != null) {
-            mBugReportPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_BUGREPORT));
-        }
-
         if (mSilentPref != null) {
             mSilentPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SILENT));
         }
-
-        updatePreferences();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updatePreferences();
     }
 
     @Override
@@ -252,10 +243,6 @@ public class PowerMenu extends SettingsPreferenceFragment
         } else if (preference == mLockdownPref) {
             value = mLockdownPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_LOCKDOWN);
-
-        } else if (preference == mBugReportPref) {
-            value = mBugReportPref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_BUGREPORT);
 
         } else if (preference == mSilentPref) {
             value = mSilentPref.isChecked();
@@ -310,19 +297,6 @@ public class PowerMenu extends SettingsPreferenceFragment
             }
         }
         saveUserConfig();
-    }
-
-    private void updatePreferences() {
-        boolean bugreport = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
-        if (mBugReportPref != null) {
-            mBugReportPref.setEnabled(bugreport);
-            if (bugreport) {
-                mBugReportPref.setSummary(null);
-            } else {
-                mBugReportPref.setSummary(R.string.power_menu_bug_report_disabled);
-            }
-        }
     }
 
     private void getUserConfig() {
