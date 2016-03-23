@@ -57,6 +57,13 @@
             android:dependency="heads_up_user_enabled"
             android:defaultValue="false" />
 
+        <com.android.settings.mallow.preference.SystemSettingSwitchPreference
+            android:key="heads_up_show_status_button"
+            android:title="@string/enable_headsup_button_extended_statusbar_title"
+            android:summary="@string/enable_headsup_button_extended_statusbar_summary"
+            android:dependency="heads_up_user_enabled"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
