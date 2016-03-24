@@ -991,10 +991,6 @@
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
 
-    <!-- Kill app long press back -->
-    <string name="kill_app_longpress_back">Kill app back button</string>
-    <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back key</string>
-
     <!-- Keyboard and Input -->
     <string name="keyboard_input_title">Keyboard and Input</string>
     <string name="keyboard_input_summary">Use auto rotation and volume key cursor</string>
@@ -1343,7 +1339,7 @@
     <string name="dashboard_switches_on">Switches On</string>
     <string name="dashboard_switches_summary">Change the position of the dashboard switches</string>
     <string name="dashboard_switches_dialog_title">Select switch state</string>
-    
+
     <!-- Sizes for pattern lockscreen -->
     <string name="lock_pattern_size_3">3x3</string>
     <string name="lock_pattern_size_4">4x4</string>
