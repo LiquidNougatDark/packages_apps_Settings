@@ -1286,8 +1286,6 @@
     <!-- Heads up -->
     <string name="heads_up_title">Heads up</string>
     <string name="heads_up_summary">Enable or disable popup notifications</string>
-    
-    <!-- Heads up -->
     <string name="headsup_section_header">Heads up notifications</string>
     <string name="heads_up_notifications">Heads up</string>
     <string name="summary_heads_up_enabled">Pop-up notifications are enabled</string>
@@ -1300,6 +1298,8 @@
     <string name="heads_up_blacklist_title">Blacklist</string>
     <string name="heads_up_whitelist_title">Whitelist</string>
     <string name="heads_up_contains_key">Already added this application to the list</string>
+    <string name="force_headsup_title">Force heads up</string>
+    <string name="force_headsup_summary">Force heads up in all applications</string>
 
     <!-- Smart pulldown -->
     <string name="smart_pulldown_title">Smart pulldown</string>

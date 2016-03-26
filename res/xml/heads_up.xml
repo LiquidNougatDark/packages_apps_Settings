@@ -19,11 +19,18 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <com.android.settings.mallow.SystemSettingSwitchPreference
-            android:key="heads_up_user_enabled"
-            android:title="@string/heads_up_notifications"
-            android:summaryOn="@string/summary_heads_up_enabled"
-            android:summaryOff="@string/summary_heads_up_disabled"
-            android:defaultValue="true" />
+        android:key="heads_up_user_enabled"
+        android:title="@string/heads_up_notifications"
+        android:summaryOn="@string/summary_heads_up_enabled"
+        android:summaryOff="@string/summary_heads_up_disabled"
+        android:defaultValue="true" />
+
+    <com.android.settings.mallow.SystemSettingSwitchPreference
+        android:key="heads_up_force_all"
+        android:title="@string/force_headsup_title"
+        android:summary="@string/force_headsup_summary"
+        android:dependency="heads_up_user_enabled"
+        android:defaultValue="false" />
 
     <PreferenceCategory
             android:title="@string/heads_up_dnd_title"
