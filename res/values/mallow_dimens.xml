@@ -42,4 +42,7 @@
     <dimen name="navigation_bar_24">24dp</dimen>
     <dimen name="navigation_bar_0">0dp</dimen>
 
+    <!-- Width and height of the color picker preference preview -->
+    <dimen name="color_picker_preference_preview_width_height">33dp</dimen>
+
 </resources>
