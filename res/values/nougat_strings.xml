@@ -14,6 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Nougat version -->
@@ -53,5 +54,8 @@
 
     <!-- Local backup password menu -->
     <string name="local_backup_password_title">Desktop backup password</string>
+
+    <!-- Personalize header name -->
+    <string name="header_category_custom">Personalize</string>
 
 </resources>
