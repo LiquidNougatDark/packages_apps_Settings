@@ -35,7 +35,7 @@ public class StatusBar extends SettingsPreferenceFragment
 
     private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
 
-    private SeekBarPreferenceChOS mHeaderShadow;
+    private SeekBarPreferenceCHOS mHeaderShadow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,10 @@ public class StatusBar extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.status_bar);
 
         // Status bar custom header shadow
-        mHeaderShadow = (SeekBarPreferenceCHOS) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
-        final int headerShadow = Settings.System.getInt(getContentResolver(),
+		mHeaderShadow = (SeekBarPreferenceCHOS) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        int headerShadow = Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
-        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
+        mHeaderShadow.setValue(headerShadow);
         mHeaderShadow.setOnPreferenceChangeListener(this);
     }
 
@@ -63,10 +63,9 @@ public class StatusBar extends SettingsPreferenceFragment
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference == mHeaderShadow) {
-         	Integer headerShadow = (Integer) newValue;
-         	int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
-         	Settings.System.putInt(getContentResolver(),
-                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
+            int headerShadow = (Integer) newValue;
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerShadow);
             return true;
         }
         return false;
