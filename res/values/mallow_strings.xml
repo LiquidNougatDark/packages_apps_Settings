@@ -791,10 +791,10 @@
 
     <!-- App sidebar -->
     <string name="app_sidebar_title">App sidebar</string>
-    <string name="app_sidebar_summary">Trigger apps using slide out bar</string>
-    <string name="app_sidebar_enable_title">Enable App Sidebar</string>
-    <string name="app_sidebar_enable_summaryOn">App Sidebar is enabled</string>
-    <string name="app_sidebar_enable_summaryOff">App Sidebar is disabled</string>
+    <string name="app_sidebar_summary">Trigger apps using bar or circle</string>
+    <string name="app_sidebar_enable_title">Enable app sidebar</string>
+    <string name="app_sidebar_enable_summaryOn">App sidebar is enabled</string>
+    <string name="app_sidebar_enable_summaryOff">App sidebar is disabled</string>
     <string name="app_sidebar_setup_items_title">Setup sidebar content</string>
     <string name="app_sidebar_setup_items_summary">Add, remove, and position items in the sidebar</string>
     <string name="app_sidebar_transparency_title">Sidebar transparency</string>
@@ -805,6 +805,7 @@
     <string name="app_sidebar_position_right">Right</string>
     <string name="app_sidebar_hide_labels_title">Hide icon labels</string>
     <string name="app_sidebar_hide_labels_summary">Hide sidebar icon labels</string>
+    <string name="sidebar_category">App sidebar</string>
     <string name="tab_category">Visible Tab</string>
     <string name="use_tab_title">Display tab</string>
     <string name="use_tab_summary">Display a visible tab on the side which will display the sidebar when touched.</string>

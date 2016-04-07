@@ -37,12 +37,6 @@
         android:fragment="com.android.settings.mallow.BatteryStyles" />
 
     <PreferenceScreen
-        android:key="app_circlebar"
-        android:title="@string/circle_bar_title"
-        android:summary="@string/circle_bar_summary"
-        android:fragment="com.android.settings.mallow.AppCircleBar" />
-
-    <PreferenceScreen
         android:key="clock_styles"
         android:title="@string/clock_styles_title"
         android:summary="@string/clock_styles_summary"
