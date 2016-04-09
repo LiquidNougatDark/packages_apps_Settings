@@ -98,7 +98,6 @@ import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.mallow.MallowTweaks;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppNotificationSettings;
@@ -134,6 +133,7 @@ import com.android.settings.mallow.MallowTweaks;
 import com.android.settings.mallow.NavigationBar;
 import com.android.settings.mallow.DisplayRotation;
 import com.android.settings.mallow.FloatingWindows;
+import com.android.settings.mallow.AmbientSettings;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -370,6 +370,7 @@ public class SettingsActivity extends Activity
             NavigationBar.class.getName(),
             DisplayRotation.class.getName(),
             FloatingWindows.class.getName(),
+            AmbientSettings.class.getName(),
             MallowTweaks.class.getName(),
 			com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
             BlacklistSettings.class.getName()
