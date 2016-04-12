@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mallow;
+package com.android.settings.gestureanywhere;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -29,14 +29,13 @@ import android.view.Gravity;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.mallow.SeekBarPreference;
-import com.android.settings.gestureanywhere.*;
 
 import com.android.internal.logging.MetricsLogger;
 
-public class GestureAnywhere extends SettingsPreferenceFragment
+public class GestureAnywhereSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
 
-    private static final String TAG = "GestureAnywhere";
+    private static final String TAG = "GestureAnywhereSettings";
 
     private static final String KEY_ENABLED = "gesture_anywhere_enabled";
     private static final String KEY_POSITION = "gesture_anywhere_position";
@@ -52,6 +51,11 @@ public class GestureAnywhere extends SettingsPreferenceFragment
     private SeekBarPreference mTriggerBottomPref;
 
     private CharSequence mPreviousTitle;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,11 +99,6 @@ public class GestureAnywhere extends SettingsPreferenceFragment
                 return true;
             }
         });
-    }
-    
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override

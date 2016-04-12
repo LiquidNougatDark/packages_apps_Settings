@@ -1890,10 +1890,6 @@
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
 
-
-        <activity android:name="gestureanywhere.GestureAnywhereBuilderActivity" />
-        <activity android:name="gestureanywhere.GestureAnywhereCreateGestureActivity" />   
-
         <!-- Development settings -->
 
         <!-- DeviceInfo adds the user's requested build to stats upload.  -->
@@ -2563,8 +2559,10 @@
 
         <!-- Mallow activities-->
         <activity android:name=".mallow.MallowTweaks" />
-        <activity android:name=".notificationlight.NotificationLightSettings" />
         <activity android:name=".notificationlight.BatteryLightSettings" />
+        <activity android:name=".notificationlight.NotificationLightSettings" />
+        <activity android:name=".gestureanywhere.GestureAnywhereBuilderActivity" />
+        <activity android:name=".gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
         <provider
             android:name=".search.SettingsSearchIndexablesProvider"

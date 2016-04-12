@@ -46,7 +46,7 @@
         android:key="gesture_anywhere"
         android:title="@string/gesture_anywhere_title"
         android:summary="@string/gesture_anywhere_summary"
-        android:fragment="com.android.settings.mallow.GestureAnywhere" />
+        android:fragment="com.android.settings.gestureanywhere.GestureAnywhereSettings" />
 
     <PreferenceScreen
         android:key="heads_up"
