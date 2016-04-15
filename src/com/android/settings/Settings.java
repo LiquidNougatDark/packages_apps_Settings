@@ -121,4 +121,7 @@ public class Settings extends SettingsActivity {
     public static class DisplayRotationActivity extends SettingsActivity { /* empty */ }
     public static class MallowTweaksActivity extends SettingsActivity { /* empty */ }
 	public static class BlacklistSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class HeadsUpActivity extends SettingsActivity { /* empty */ }
+    public static class PieControlActivity extends SettingsActivity { /* empty */ }
+    public static class NavigationBarActivity extends SettingsActivity { /* empty */ }
 }

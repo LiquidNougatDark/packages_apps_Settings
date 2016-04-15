@@ -129,6 +129,12 @@ import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
+import com.android.settings.mallow.HeadsUp;
+import com.android.settings.mallow.PieControl;
+import com.android.settings.mallow.MallowTweaks;
+import com.android.settings.mallow.NavigationBar;
+import com.android.settings.mallow.DisplayRotation;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -359,6 +365,10 @@ public class SettingsActivity extends Activity
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
+            HeadsUp.class.getName(),
+            PieControl.class.getName(),
+            MallowTweaks.class.getName(),
+            NavigationBar.class.getName(),
             DisplayRotation.class.getName(),
             MallowTweaks.class.getName(),
 			com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
