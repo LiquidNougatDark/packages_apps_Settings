@@ -1275,9 +1275,6 @@
     <string name="screenshot_sound_title">Screenshot sound</string>
     <string name="screenshot_sound_summary">Plays sound effect when screenshot is taken</string>
 
-    <!-- Seconds clock -->
-    <string name="status_bar_show_clock_second_title">Clock seconds</string>
-
     <!-- Volume dialog transparency -->
     <string name="volume_dialog_transparency">Volume dialog transparency</string>
 

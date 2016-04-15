@@ -29,11 +29,6 @@
         android:defaultValue="0xffffff"
         android:dependency="status_bar_show_clock" />
 
-    <com.android.settings.mallow.SystemSettingSwitchPreference
-        android:key="clock_use_second"
-        android:title="@string/status_bar_show_clock_second_title"
-        android:defaultValue="false" />
-
     <ListPreference
         android:key="clock_style"
         android:entries="@array/clock_style_entries"
@@ -58,17 +53,17 @@
         android:dependency="status_bar_show_clock" />
 
     <ListPreference
-        android:key="clock_date_position"
-        android:title="@string/clock_date_position"
-        android:entries="@array/clock_date_position_entries"
-        android:entryValues="@array/clock_date_position_values" />
-
-    <ListPreference
         android:key="clock_date_style"
         android:title="@string/clock_date_style"
         android:entries="@array/clock_date_style_entries"
         android:entryValues="@array/clock_date_style_values"
         android:dependency="status_bar_show_clock" />
+
+    <ListPreference
+        android:key="clock_date_position"
+        android:title="@string/clock_date_position"
+        android:entries="@array/clock_date_position_entries"
+        android:entryValues="@array/clock_date_position_values" />
 
     <ListPreference
         android:key="clock_date_format"
