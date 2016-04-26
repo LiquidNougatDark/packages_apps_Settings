@@ -140,7 +140,7 @@
 
  
 	<!-- Pseudo-activity used to provide an intent-filter entry point to Rotation settings -->
-	<activity android:name="Settings$DisplayRotationSettingsActivity"
+	<activity android:name="Settings$DisplayRotationActivity"
 		android:label="@string/display_rotation_title"
 		android:taskAffinity=""
 		android:excludeFromRecents="true">
@@ -1888,6 +1888,56 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
+        </activity>
+
+	    <!-- Floating windows -->
+        <activity android:name="Settings$FloatingWindowsActivity"
+                android:label="@string/floating_windows_title"
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mallow.FloatingWindows" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/display_settings" />
+        </activity>
+
+	    <!-- Heads up -->
+        <activity android:name="Settings$HeadsUpActivity"
+                android:label="@string/heads_up_title"
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mallow.HeadsUp" />
+        </activity>
+
+	    <!-- Navigation bar -->
+        <activity android:name="Settings$NavigationBarActivity"
+                android:label="@string/navigation_bar_title"
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mallow.NavigationBar" />
+        </activity>
+
+	    <!-- Pie control -->
+        <activity android:name="Settings$PieControlActivity"
+                android:label="@string/pie_control_title"
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mallow.PieControl" />
         </activity>
 
         <!-- Development settings -->
