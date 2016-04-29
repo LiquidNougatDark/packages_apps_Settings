@@ -1563,7 +1563,7 @@
     <string name="media_scanner_on_boot_ask">Ask to scan (notification)</string>
     <string name="media_scanner_on_boot_disabled">Do not scan media</string>
 
-    <!-- Tiles animation style  -->
+    <!-- Tiles animation style -->
     <string name="quicksettings_tiles_category">Tile animation options</string>
     <string name="qs_tile_animation_style_title">Tiles animation style</string>
     <string name="qs_tile_animation_duration_title">Tiles animation duration</string>
@@ -1585,5 +1585,15 @@
     <string name="qs_set_animation_style">%1$s</string>
     <string name="qs_set_animation_duration">%1$s</string>
     <string name="qs_set_animation_interpolator">%1$s</string>
+
+    <!-- Lock screen visualizer settings -->
+    <string name="show_title">Show</string>
+    <string name="visualizer_show_summary">Enable to show the music visualizer on the lock screen</string>
+    <string name="visualizer_use_custom_color_title">Customize the color</string>
+    <string name="visualizer_use_custom_color_summary">Enable to use a custom color, disable to create the color from the lock screen background automatically</string>
+
+     <!-- Lock screen (preference screen) -->
+    <string name="lock_screen_visualizer_settings_title">Music visualizer</string>
+    <string name="lock_screen_visualizer_settings_summary">Customize the music visualizer</string>
 
 </resources>
