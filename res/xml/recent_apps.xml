@@ -57,10 +57,10 @@
             android:dependency="show_clear_all_recents" />
 
         <com.android.settings.mallow.SystemSettingSwitchPreference
-            android:key="recents_show_search_bar"
+            android:key="recents_search_bar"
             android:title="@string/recents_show_searchbar"
             android:summary="@string/recents_show_searchbar_summary"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <com.android.settings.mallow.SystemSettingSwitchPreference
             android:key="systemui_recents_mem_display"
