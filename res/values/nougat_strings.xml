@@ -51,4 +51,7 @@
     <!-- Summary text for double twist for camera mode -->
     <string name="double_twist_for_camera_mode_summary_pn">To switch in and out of selfie mode in Google Camera, double-twist when you’re in the app</string>
 
+    <!-- Local backup password menu -->
+    <string name="local_backup_password_title">Desktop backup password</string>
+
 </resources>
