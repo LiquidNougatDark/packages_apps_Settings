@@ -53,6 +53,8 @@ public class NotificationDrawer extends SettingsPreferenceFragment
     private static final String FLASHLIGHT_NOTIFICATION = "flashlight_notification";
     private static final String PREF_QS_TRANSPARENT_SHADE = "qs_transparent_shade";
 	private static final String PREF_QS_TRANSPARENT_HEADER = "qs_transparent_header";
+    private static final String PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
+    private static final String PREF_TILE_ANIM_DURATION = "qs_tile_animation_duration";
 
     private ListPreference mQuickPulldown;
     private ListPreference mSmartPulldown;
@@ -60,6 +62,8 @@ public class NotificationDrawer extends SettingsPreferenceFragment
     private SeekBarPreferenceCHOS mQSShadeAlpha;
     private SeekBarPreferenceCHOS mQSHeaderAlpha;
     private ListPreference mNumColumns;
+    private ListPreference mTileAnimationStyle;
+    private ListPreference mTileAnimationDuration;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,11 +128,33 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             mFlashlightNotification.setChecked((Settings.System.getInt
                 (getContentResolver(), Settings.System.FLASHLIGHT_NOTIFICATION, 0) == 1));
         }
+
+        mTileAnimationStyle = (ListPreference) findPreference(PREF_TILE_ANIM_STYLE);
+        int tileAnimationStyle = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.ANIM_TILE_STYLE, 0,
+                UserHandle.USER_CURRENT);
+        mTileAnimationStyle.setValue(String.valueOf(tileAnimationStyle));
+        updateTileAnimationStyleSummary(tileAnimationStyle);
+        updateAnimTileDuration(tileAnimationStyle);
+        mTileAnimationStyle.setOnPreferenceChangeListener(this);
+
+        mTileAnimationDuration = (ListPreference) findPreference(PREF_TILE_ANIM_DURATION);
+        int tileAnimationDuration = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.ANIM_TILE_DURATION, 2000,
+                UserHandle.USER_CURRENT);
+        mTileAnimationDuration.setValue(String.valueOf(tileAnimationDuration));
+        updateTileAnimationDurationSummary(tileAnimationDuration);
+        mTileAnimationDuration.setOnPreferenceChangeListener(this);
     }
 
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DONT_TRACK_ME_BRO;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -168,7 +194,20 @@ public class NotificationDrawer extends SettingsPreferenceFragment
                     numColumns, UserHandle.USER_CURRENT);
             updateNumColumnsSummary(numColumns);
             return true;
-        }	
+        } else if (preference == mTileAnimationStyle) {
+            int tileAnimationStyle = Integer.valueOf((String) objValue);
+            Settings.System.putIntForUser(getContentResolver(), Settings.System.ANIM_TILE_STYLE,
+                    tileAnimationStyle, UserHandle.USER_CURRENT);
+            updateTileAnimationStyleSummary(tileAnimationStyle);
+            updateAnimTileDuration(tileAnimationStyle);
+            return true;
+        } else if (preference == mTileAnimationDuration) {
+            int tileAnimationDuration = Integer.valueOf((String) objValue);
+            Settings.System.putIntForUser(getContentResolver(), Settings.System.ANIM_TILE_DURATION,
+                    tileAnimationDuration, UserHandle.USER_CURRENT);
+            updateTileAnimationDurationSummary(tileAnimationDuration);
+            return true;
+        }
         return false;
     }
 
@@ -229,6 +268,28 @@ public class NotificationDrawer extends SettingsPreferenceFragment
             // Remove title capitalized formatting
             type = type.toLowerCase();
             mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_summary, type));
+        }
+    }
+
+    private void updateTileAnimationStyleSummary(int tileAnimationStyle) {
+        String prefix = (String) mTileAnimationStyle.getEntries()[mTileAnimationStyle.findIndexOfValue(String
+                .valueOf(tileAnimationStyle))];
+        mTileAnimationStyle.setSummary(getResources().getString(R.string.qs_set_animation_style, prefix));
+    }
+
+    private void updateTileAnimationDurationSummary(int tileAnimationDuration) {
+        String prefix = (String) mTileAnimationDuration.getEntries()[mTileAnimationDuration.findIndexOfValue(String
+                .valueOf(tileAnimationDuration))];
+        mTileAnimationDuration.setSummary(getResources().getString(R.string.qs_set_animation_duration, prefix));
+    }
+
+    private void updateAnimTileDuration(int tileAnimationStyle) {
+        if (mTileAnimationDuration != null) {
+            if (tileAnimationStyle == 0) {
+                mTileAnimationDuration.setSelectable(false);
+            } else {
+                mTileAnimationDuration.setSelectable(true);
+            }
         }
     }
 }
