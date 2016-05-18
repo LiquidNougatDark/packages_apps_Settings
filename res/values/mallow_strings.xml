@@ -1308,8 +1308,6 @@
     <string name="heads_up_notifications">Heads up</string>
     <string name="summary_heads_up_enabled">Pop-up notifications are enabled</string>
     <string name="summary_heads_up_disabled">Pop-up notifications are disabled</string>
-    <string name="heads_up_snooze">Snooze</string>
-    <string name="heads_up_timeout">Timeout</string>
     <string name="add_heads_up_package">Add app</string>
     <string name="add_heads_up_dnd_summary">Don\'t show heads up in these applications</string>
     <string name="add_heads_up_whitelist_summary">Post all notification from these applications to heads up</string>
