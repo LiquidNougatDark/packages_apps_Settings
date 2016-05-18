@@ -18,8 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <com.android.settings.mallow.GlobalSettingSwitchPreference
-            android:key="heads_up_notifications_enabled"
+    <com.android.settings.mallow.SystemSettingSwitchPreference
+            android:key="heads_up_user_enabled"
             android:title="@string/heads_up_notifications"
             android:summaryOn="@string/summary_heads_up_enabled"
             android:summaryOff="@string/summary_heads_up_disabled"
@@ -28,7 +28,7 @@
     <PreferenceCategory
             android:title="@string/heads_up_dnd_title"
             android:key="dnd_applications_list"
-            android:dependency="heads_up_notifications_enabled" >
+            android:dependency="heads_up_user_enabled" >
         <Preference
             android:key="add_dnd_packages"
             android:icon="@drawable/ic_menu_add_dark"
@@ -39,7 +39,7 @@
     <PreferenceCategory
             android:title="@string/heads_up_blacklist_title"
             android:key="blacklist_applications"
-            android:dependency="heads_up_notifications_enabled" >
+            android:dependency="heads_up_user_enabled" >
         <Preference
             android:key="add_blacklist_packages"
             android:icon="@drawable/ic_menu_add_dark"
@@ -50,7 +50,7 @@
     <PreferenceCategory
             android:title="@string/heads_up_whitelist_title"
             android:key="whitelist_applications"
-            android:dependency="heads_up_notifications_enabled" >
+            android:dependency="heads_up_user_enabled" >
         <Preference
             android:key="add_whitelist_packages"
             android:icon="@drawable/ic_menu_add_dark"
