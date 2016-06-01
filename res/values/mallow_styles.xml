@@ -55,4 +55,15 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- Theme styles -->
+    <style name="Theme.DateTimeSettingsSetupWizard" parent="@android:style/Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.SettingsLicenseActivity" parent="@android:style/Theme.Material.Light.Panel" />
+
+    <style name="Theme.AppPicker" parent="@android:style/Theme.Material.Light.Dialog" />
+
+    <style name="Theme.SettingsDialog" parent="@android:style/Theme.Material.Light.Dialog.NoActionBar" />
+
+    <style name="Theme.SettingsAlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert" />
+
 </resources>
