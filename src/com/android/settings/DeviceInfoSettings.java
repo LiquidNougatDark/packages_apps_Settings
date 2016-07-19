@@ -90,6 +90,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String PROPERTY_SM_FLAGS = "ro.sm.flags";
     private static final String KEY_DTC_VERSION = "dtc_version";
     private static final String PROPERTY_DTC_VERSION = "ro.dtc.version";
+    private static final String KEY_VENDOR_VERSION = "vendor_version";
 
     long[] mHits = new long[3];
     int mDevHitCountdown;
@@ -127,6 +128,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH));
 
+        }
+        String vendorfingerprint = SystemProperties.get("ro.vendor.build.fingerprint");
+        if (vendorfingerprint != null && !TextUtils.isEmpty(vendorfingerprint)) {
+            String[] splitfingerprint = vendorfingerprint.split("/");
+            String vendorid = splitfingerprint[3];
+            setStringSummary(KEY_VENDOR_VERSION, vendorid);
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_VENDOR_VERSION));
         }
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + getMsvSuffix());

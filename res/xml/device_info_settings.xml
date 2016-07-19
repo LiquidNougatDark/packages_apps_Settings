@@ -95,6 +95,12 @@
                 android:title="@string/mallow_version_title"
                 android:summary="@string/mallow_version_default"/>
 
+        <!-- Vendor Version -->
+        <Preference android:key="vendor_version"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/vendor_version"
+                android:summary="@string/vendor_version_default" />
+
         <!-- Mallow build date -->
         <Preference android:key="build_date"
                 style="?android:preferenceInformationStyle"
