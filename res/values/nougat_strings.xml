@@ -20,6 +20,10 @@
     <string name="nougat_version">Nougat version</string>
     <string name="nougat_version_default">Unknown</string>
 
+    <!-- Vendor version -->
+    <string name="vendor_version">Vendor version</string>
+    <string name="vendor_version_default">Unknown</string>
+
     <!-- Build date -->
     <string name="build_date">Build date</string>
     <string name="build_date_default">2014-01-01-0000</string>

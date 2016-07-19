@@ -115,6 +115,13 @@
                 android:title="@string/nougat_version"
                 android:summary="@string/nougat_version_default"/>
 
+        <!-- Vendor Version -->
+        <Preference android:key="vendor_version"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:title="@string/vendor_version"
+                android:summary="@string/vendor_version_default" />
+
         <!-- Build version -->
         <Preference android:key="build_number"
                 android:enabled="false"
