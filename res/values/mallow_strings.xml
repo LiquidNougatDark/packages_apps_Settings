@@ -105,6 +105,7 @@
     <string name="animations_category">Animations</string>
     <string name="battery_bar_category">Battery bar</string>
     <string name="battery_style_category">Battery</string>
+    <string name="bubble_category">Bubble</string>
     <string name="buttons_category">Buttons</string>
     <string name="clock_category">Clock</string>
     <string name="circlebar_category">Circlebar</string>
@@ -140,6 +141,7 @@
     <string name="clock_styles_title">Clock and date</string>
     <string name="gesture_anywhere_title">Gesture anywhere</string>
     <string name="heads_up_title">Heads up</string>
+    <string name="halo_bubble_title">Halo bubble</string>
     <string name="lock_screen_title">Lock screen</string>
     <string name="navigation_bar_title">Navigation bar</string>
     <string name="notification_drawer_title">Notification drawer</string>
@@ -1642,5 +1644,49 @@
     <!-- Volume dialog expanded -->
     <string name="volume_dialog_force_expanded_title">Volume panel expanded</string>
     <string name="volume_dialog_force_expanded_summary">Force volume panel to always appear expanded</string>
+
+    <!-- Halo bubble -->
+    <string name="halo_enable_title">Halo bubble</string>
+    <string name="halo_enable_summary">Shows floating bubble to manage tasks</string>
+    <string name="halo_behavior_title">Halo behavior</string>
+    <string name="halo_hide_title">Hide Halo after activity</string>
+    <string name="halo_hide_summary">Halo will appear for incoming tasks and scroll out of sight after a while</string>
+    <string name="halo_pause_title">Pause active app</string>
+    <string name="halo_pause_summary">When opening an app with Halo the underlying app will get paused</string>
+    <string name="halo_notification_msgbox_title">Enable message pop-up</string>
+    <string name="halo_notification_msgbox_summary">Show message box for incoming notifications</string>
+    <string name="halo_unlock_ping_title">Ping on unlock</string>
+    <string name="halo_unlock_ping_summary">Halo will ping when device is unlocked if new notifications were received</string>
+
+    <string name="halo_size_title">Halo size</string>
+    <string name="halo_size_summary">Defines how big Halo is going to be</string>
+    <string name="halo_size_miniscule">Miniscule</string>
+    <string name="halo_size_small">Small</string>
+    <string name="halo_size_default">Normal (default)</string>
+    <string name="halo_size_large">Large</string>
+    <string name="halo_size_gigantic">Gigantic</string>
+    <string name="halo_size_monster">Monster</string>
+
+    <string name="halo_notification_count_title">Notification count</string>
+    <string name="halo_notification_count_summary">Display notification counts on Halo</string>
+    <string name="halo_notification_count_none">None</string>
+    <string name="halo_notification_count_total">Total</string>
+    <string name="halo_notification_count_individual">Per app</string>
+    <string name="halo_notification_count_both">Both</string>
+
+    <string name="halo_msgbox_animation_title">Message box animation</string>
+    <string name="halo_msgbox_animation_summary">Halo message box animation for incoming notifications</string>
+    <string name="halo_msgbox_animation_none">None</string>
+    <string name="halo_msgbox_animation_flip">Flip</string>
+
+    <!-- Label for are-halo-notifications-allowed checkbox in app details [CHAR LIMIT=20] -->
+    <string name="app_halo_label_black">Blacklist from Halo</string>
+    <string name="app_halo_label_white">Whitelist from Halo</string>
+
+    <!-- Halo blacklist -->
+    <string name="app_notification_halo_title">Show notification in Halo</string>
+    <string name="app_notification_halo_summary">Let this app show notifications in Halo</string>
+    <string name="filter_notif_no_halo">No notifications in Halo</string>
+    <string name="notifications_four_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%3$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%4$s</xliff:g></string>
 
 </resources>

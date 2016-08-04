@@ -34,6 +34,7 @@ import com.android.settings.widget.PagerSlidingTabStrip;
 
 import com.android.settings.mallow.advanced.AppSidebar;
 import com.android.settings.mallow.advanced.GestureAnywhere;
+import com.android.settings.mallow.advanced.HaloBubble;
 import com.android.settings.mallow.advanced.PieControl;
 import com.android.settings.mallow.navigation.NavigationBar;
 import com.android.settings.mallow.statusbar.BatteryStyles;
@@ -97,13 +98,14 @@ public class MallowTweaks extends SettingsPreferenceFragment {
             frags[2] = new ClockStyles();
             frags[3] = new GestureAnywhere();
             frags[4] = new HeadsUp();
-            frags[5] = new LockScreen();
-            frags[6] = new NavigationBar();
-            frags[7] = new NotificationDrawer();
-            frags[8] = new PieControl();
-            frags[9] = new PowerMenu();
-            frags[10] = new RecentPanel();
-            frags[11] = new StatusBar();
+            frags[5] = new HaloBubble();
+            frags[6] = new LockScreen();
+            frags[7] = new NavigationBar();
+            frags[8] = new NotificationDrawer();
+            frags[9] = new PieControl();
+            frags[10] = new PowerMenu();
+            frags[11] = new RecentPanel();
+            frags[12] = new StatusBar();
         }
 
         @Override
@@ -130,6 +132,7 @@ public class MallowTweaks extends SettingsPreferenceFragment {
                 getString(R.string.clock_styles_title),
                 getString(R.string.gesture_anywhere_title),
                 getString(R.string.heads_up_title),
+                getString(R.string.halo_bubble_title),
                 getString(R.string.lock_screen_title),
                 getString(R.string.navigation_bar_title),
                 getString(R.string.notification_drawer_title),

@@ -129,6 +129,7 @@ import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
+import com.android.settings.mallow.advanced.HaloBubble;
 import com.android.settings.mallow.advanced.PieControl;
 import com.android.settings.mallow.fragments.MallowTweaks;
 import com.android.settings.mallow.display.AmbientSettings;
@@ -368,6 +369,7 @@ public class SettingsActivity extends Activity
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             HeadsUp.class.getName(),
+            HaloBubble.class.getName(),
             PieControl.class.getName(),
             MallowTweaks.class.getName(),
             NavigationBar.class.getName(),
