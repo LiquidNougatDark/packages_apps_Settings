@@ -26,6 +26,7 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class HaloBubble extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
@@ -33,10 +34,12 @@ public class HaloBubble extends SettingsPreferenceFragment
     private static final String KEY_HALO_SIZE = "halo_size";
     private static final String KEY_HALO_MSGBOX_ANIMATION = "halo_msgbox_animation";
     private static final String KEY_HALO_NOTIFY_COUNT = "halo_notify_count";
+    private static final String KEY_HALO_COLOR = "halo_color";
 
     private ListPreference mHaloSize;
     private ListPreference mHaloNotifyCount;
     private ListPreference mHaloMsgAnimate;
+    private ColorPickerPreference mHaloColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,9 @@ public class HaloBubble extends SettingsPreferenceFragment
             // fail...
         }
         mHaloMsgAnimate.setOnPreferenceChangeListener(this);
+
+        mHaloColor = (ColorPickerPreference) findPreference(KEY_HALO_COLOR);
+        mHaloColor.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -94,6 +100,11 @@ public class HaloBubble extends SettingsPreferenceFragment
             int haloNotifyCount = Integer.valueOf((String) newValue);
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.HALO_NOTIFY_COUNT, haloNotifyCount);
+            return true;
+        } else if (preference == mHaloColor) {
+            int haloColor = Integer.valueOf(String.valueOf(newValue));
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.HALO_COLOR, haloColor);
             return true;
         }
         return false;
