@@ -82,9 +82,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_UBER_KERNEL = "uber_kernel";
     private static final String KEY_UBER_FLAGS = "uber_flags";
     private static final String KEY_DTC_VERSION = "dtc_version";
-    private static final String PROPERTY_UBER_AND = "ro.uber.android";
-    private static final String PROPERTY_UBER_KERNEL = "ro.uber.kernel";
-    private static final String PROPERTY_UBER_FLAGS = "ro.uber.flags";
     private static final String PROPERTY_DTC_VERSION = "ro.dtc.version";
 
     /* Reduced taps from 7 to 3 for developer options */
@@ -136,10 +133,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
         setValueSummary(KEY_MOD_BUILD_DATE, "ro.build.date");
         setValueSummary(KEY_MALLOW_VERSION, "ro.mallow.version");
-        setValueSummary(KEY_UBER_AND, PROPERTY_UBER_AND);
-        setValueSummary(KEY_UBER_KERNEL,  PROPERTY_UBER_KERNEL);
-        setValueSummary(KEY_UBER_FLAGS, PROPERTY_UBER_FLAGS);
-        setValueSummary(KEY_DTC_VERSION, PROPERTY_DTC_VERSION);
+		findPreference(KEY_UBER_KERNEL).setEnabled(true);
+        findPreference(KEY_UBER_FLAGS).setEnabled(true);
+		setValueSummary(KEY_UBER_AND, "ro.uber.android");
+        setValueSummary(KEY_UBER_KERNEL, "ro.uber.kernel");
+        setValueSummary(KEY_UBER_FLAGS, "ro.uber.flags");
+        setValueSummary(KEY_DTC_VERSION, "ro.dtc.version");
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -152,14 +151,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // Remove selinux information if property is not present
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SELINUX_STATUS,
                 PROPERTY_SELINUX_STATUS);
-
-        // Remove GCC UBER information if property is not present
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_UBER_AND,
-                PROPERTY_UBER_AND);
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_UBER_KERNEL,
-                PROPERTY_UBER_KERNEL);
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_UBER_FLAGS,
-                PROPERTY_UBER_FLAGS);
 
         // Remove Dragon TC information if property is not present
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_DTC_VERSION,
