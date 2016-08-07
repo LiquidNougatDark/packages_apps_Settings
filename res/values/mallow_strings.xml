@@ -33,16 +33,6 @@
     <string name="mallow_version_title">Mallow version</string>
     <string name="mallow_version_default">Unknown</string>
 
-    <!-- UBER GCC version info -->
-    <string name="uber_android">GCC android</string>
-    <string name="uber_android_default">Unknown</string>
-    <string name="uber_kernel">GCC kernel</string>
-    <string name="uber_kernel_default">Unknown</string>
-
-    <!-- UBER GCC build flags info -->
-    <string name="uber_flags">Optimizations</string>
-    <string name="uber_flags_default">None</string>
-
     <!-- Changelog -->
     <string name="changelog_mallow_title">Changelog</string>
     <string name="changelog_mallow_error">Unable to load changelog</string>
