@@ -1696,5 +1696,6 @@
     <!-- Use floating mode -->
     <string name="halo_floating_notifications_title">Use floating mode</string>
     <string name="halo_floating_notifications_summary">Launch tasks from notifications in floating mode</string>
+    <string name="halo_enable_float_summary">Enable floating mode first</string>
 
 </resources>

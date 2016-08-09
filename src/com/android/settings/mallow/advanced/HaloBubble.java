@@ -35,11 +35,13 @@ public class HaloBubble extends SettingsPreferenceFragment
     private static final String KEY_HALO_MSGBOX_ANIMATION = "halo_msgbox_animation";
     private static final String KEY_HALO_NOTIFY_COUNT = "halo_notify_count";
     private static final String KEY_HALO_COLOR = "halo_color";
+    private static final String KEY_HALO_FLOAT_NOTIFICATIONS = "halo_float_notifications";
 
     private ListPreference mHaloSize;
     private ListPreference mHaloNotifyCount;
     private ListPreference mHaloMsgAnimate;
     private ColorPickerPreference mHaloColor;
+    private SwitchPreference mHaloFloat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,13 @@ public class HaloBubble extends SettingsPreferenceFragment
 
         mHaloColor = (ColorPickerPreference) findPreference(KEY_HALO_COLOR);
         mHaloColor.setOnPreferenceChangeListener(this);
+
+        mHaloFloat = (SwitchPreference) findPreference(KEY_HALO_FLOAT_NOTIFICATIONS);
+        if (Settings.System.getInt(getContentResolver(),
+                  Settings.System.FLOATING_WINDOW_MODE, 0) == 0) {
+            mHaloFloat.setEnabled(false);
+            mHaloFloat.setSummary(R.string.halo_enable_float_summary);
+        }
     }
 
     @Override
