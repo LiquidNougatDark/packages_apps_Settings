@@ -163,4 +163,5 @@ public class Settings extends SettingsActivity {
 
     // Liquid Nougat
     public static class SuperSUActivity extends SettingsActivity { /* empty */ }
+    public static class SubstratumActivity extends SettingsActivity { /* empty */ }
 }

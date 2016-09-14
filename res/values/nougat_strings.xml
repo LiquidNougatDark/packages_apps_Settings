@@ -62,4 +62,8 @@
     <string name="supersu_title">SuperSU</string>
     <string name="supersu_summary">Manage root permissions</string>
 
+    <!-- Substratum header name -->
+    <string name="substratum_title">Substratum</string>
+    <string name="substratum_summary">Customize device theme</string>
+
 </resources>
