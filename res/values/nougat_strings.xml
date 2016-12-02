@@ -20,6 +20,14 @@
     <string name="nougat_version">Nougat version</string>
     <string name="nougat_version_default">Unknown</string>
 
+    <!-- UBER Compiler -->
+    <string name="build_compiler_gcc">GCC version</string>
+    <string name="build_compiler_default">Unknown</string>
+
+    <!-- UBER Clang -->
+    <string name="build_compiler_clang">Clang version</string>
+    <string name="build_compiler_default">Unknown</string>
+
     <!-- Vendor version -->
     <string name="vendor_version">Vendor version</string>
     <string name="vendor_version_default">Unknown</string>
