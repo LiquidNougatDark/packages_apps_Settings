@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,7 +39,7 @@ import com.android.settings.R;
 public class AppOpsSummary extends InstrumentedFragment {
     // layout inflater object used to inflate views
     private LayoutInflater mInflater;
-    
+
     private ViewGroup mContentContainer;
     private View mRootView;
     private ViewPager mViewPager;
@@ -114,13 +116,12 @@ public class AppOpsSummary extends InstrumentedFragment {
         mViewPager.setOnPageChangeListener(adapter);
         PagerTabStrip tabs = (PagerTabStrip) rootView.findViewById(R.id.tabs);
 
-        // HACK - https://code.google.com/p/android/issues/detail?id=213359
-        ((ViewPager.LayoutParams)tabs.getLayoutParams()).isDecor = true;
-
         Resources.Theme theme = tabs.getContext().getTheme();
         TypedValue typedValue = new TypedValue();
         theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
-        final int colorAccent = getContext().getColor(typedValue.resourceId);
+        final int colorAccent = typedValue.resourceId != 0
+                ? getContext().getColor(typedValue.resourceId)
+                : getContext().getColor(R.color.switch_accent_color);
         tabs.setTabIndicatorColor(colorAccent);
 
         // We have to do this now because PreferenceFrameLayout looks at it
