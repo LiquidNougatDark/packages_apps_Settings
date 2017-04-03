@@ -75,7 +75,7 @@
                         android:data="https://source.android.com/security/bulletin/" />
         </PreferenceScreen>
 
-        <!-- Device FCC equipment id -->
+        <!-- Device FCC equipment -->
         <com.android.settings.DividerPreference
                 android:key="fcc_equipment_id"
                 android:enabled="false"
@@ -86,7 +86,7 @@
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
 
-        <!-- Device Baseband version -->
+        <!-- Baseband version -->
         <com.android.settings.DividerPreference
                 android:key="baseband_version"
                 android:enabled="false"
@@ -97,7 +97,7 @@
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
 
-        <!-- Device Kernel version -->
+        <!-- Kernel version -->
         <com.android.settings.DividerPreference
                 android:key="kernel_version"
                 android:enabled="false"
@@ -109,34 +109,50 @@
                 settings:allowDividerBelow="true"/>
 
         <!-- Nougat version -->
-        <Preference android:key="nougat_version"
+        <com.android.settings.DividerPreference
+                android:key="nougat_version"
                 android:enabled="false"
                 android:shouldDisableView="false"
+                android:selectable="false"
                 android:title="@string/nougat_version"
-                android:summary="@string/nougat_version_default"/>
+                android:summary="@string/nougat_version_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
 
-        <!-- Vendor Version -->
-        <Preference android:key="vendor_version"
+        <!-- Build number -->
+        <com.android.settings.DividerPreference
+                android:key="build_number"
                 android:enabled="false"
                 android:shouldDisableView="false"
-                android:title="@string/vendor_version"
-                android:summary="@string/vendor_version_default" />
-
-        <!-- Build version -->
-        <Preference android:key="build_number"
-                android:enabled="false"
-                android:shouldDisableView="false"
+                android:selectable="true"
                 android:title="@string/build_number"
-                android:summary="@string/device_info_default"/>
+                android:summary="@string/device_info_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
+
+        <!-- Vendor version -->
+        <com.android.settings.DividerPreference
+                android:key="vendor_version"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
+                android:title="@string/vendor_version"
+                android:summary="@string/vendor_version_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
 
         <!-- Build date -->
-        <Preference android:key="build_date"
+        <com.android.settings.DividerPreference
+                android:key="build_date"
                 android:enabled="false"
                 android:shouldDisableView="false"
+                android:selectable="false"
                 android:title="@string/build_date"
-                android:summary="@string/build_date_default"/>
+                android:summary="@string/build_date_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
 
-        <!-- SELinux status information -->
+        <!-- SELinux status -->
         <com.android.settings.DividerPreference
                 android:key="selinux_status"
                 android:enabled="false"
@@ -147,16 +163,26 @@
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
 
-        <!-- GCC used -->
-        <Preference android:key="build_compiler_gcc"
-                style="?android:preferenceInformationStyle"
+        <!-- GCC version -->
+        <com.android.settings.DividerPreference
+                android:key="build_compiler_gcc"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
                 android:title="@string/build_compiler_gcc"
-                android:summary="@string/build_compiler_default" />
+                android:summary="@string/build_compiler_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
 
-        <!-- Clang used -->
-        <Preference android:key="build_compiler_clang"
-                style="?android:preferenceInformationStyle"
+        <!-- Clang version -->
+        <com.android.settings.DividerPreference
+                android:key="build_compiler_clang"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
                 android:title="@string/build_compiler_clang"
-                android:summary="@string/build_compiler_default" />
+                android:summary="@string/build_compiler_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
 
 </PreferenceScreen>
